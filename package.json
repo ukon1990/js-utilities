@@ -1,13 +1,13 @@
 {
   "name": "@ukon1990/js-utilities",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A light weight package for object and array manipulation. As well as some utilities for matching text.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "publish": "npm publish --access public"
+    "deploy": "tsc && npm publish --access public"
   },
   "keywords": [
     "String",
