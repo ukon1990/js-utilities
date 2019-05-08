@@ -48,17 +48,17 @@ export class ObjectUtil {
         return obj;
     }
 
-    private static cloneField(object: any, key: string, obj: any) {
+    private static cloneField(object: any, key: string, targetObject: any) {
         if (ArrayUtil.isArray(object[key])) {
-            obj[key] = ArrayUtil.clone(object[key]);
+            targetObject[key] = ArrayUtil.clone(object[key]);
         } else if (ObjectUtil.isObject(object[key])) {
-            obj[key] = ObjectUtil.clone(object[key]);
+            targetObject[key] = ObjectUtil.clone(object[key]);
         } else {
-            obj[key] = object[key];
+            targetObject[key] = object[key];
         }
     }
 
-    public static isEqual(object1: Object, object2: Object): boolean {
+    public static isEqual(object1: object, object2: object): boolean {
         return ObjectUtil.getDifference(object1, object2).length === 0;
     }
 
