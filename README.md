@@ -16,6 +16,7 @@ This is a small package with some utilities.
 * `getDifference(array1, array2)` - Returns an array of differences as `Difference` objects.
 
 ## TextUtil
+* `isEmpty(string)` - Checks if a string is null, undefined or has a length of 0.
 * `getMatchingParts(string, stringToFind)` - 
 Returns a Match object. The Match object for `getMatchingParts('Chicken', 'ck')` 
 looks like this `{start: 'Chi', match: 'ck', end: 'en'}`.
