@@ -62,16 +62,32 @@ export class ObjectUtil {
         return ObjectUtil.getDifference(object1, object2).length === 0;
     }
 
-    public static getDifference(object1: object | any, object2: object | any, ignoreFields?: any): Array<Difference> {
-        const differences = new Array<Difference>();
+    public static getDifference(object1: object | any, object2: object | any, ignoreFields?: any, onlyFields?: string[]): Array<Difference> {
+        const differences = new Array<Difference>(),
+            onlyFieldsMap = new Map<string, boolean>();
+
+        if (ArrayUtil.isArray(ignoreFields)) {
+            let fields = new Map<string, boolean>();
+            ignoreFields
+                .forEach((field: string) =>
+                fields.set(field, true));
+            ignoreFields = fields;
+        }
+
+        if (onlyFields) {
+            onlyFields.forEach((field: string) =>
+            onlyFieldsMap.set(field, true));
+        }
+
         if (EmptyUtil.isNullOrUndefined(object1) || EmptyUtil.isNullOrUndefined(object2)) {
             differences.push(new Difference('array', object1, object2));
         } else {
             Object.keys(object1).forEach(n => {
                 if (ignoreFields && ignoreFields[n]) {
                     return;
+                } else if (!onlyFields || onlyFields && onlyFieldsMap.get(n)) {
+                    CompareUtil.setDifferences(n, object1[n], object2[n], differences);
                 }
-                CompareUtil.setDifferences(n, object1[n], object2[n], differences);
             });
         }
         return differences;
