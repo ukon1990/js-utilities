@@ -2,6 +2,12 @@ import {Match} from '../models/match.model';
 import {EmptyUtil} from "./empty.util";
 
 export class TextUtil {
+    public static isEmpty(source: string): boolean {
+        if (!source) return true;
+        if (source === null) return true;
+        if (source.length === 0) return true;
+        return false;
+    }
 
     public static contains(source: string, target: string): boolean {
         if (EmptyUtil.isNullOrUndefined(source) || EmptyUtil.isNullOrUndefined(target)) {
