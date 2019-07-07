@@ -1,6 +1,8 @@
 # Javascript utilities
 This is a small package with some utilities.
 
+To install: `npm i @ukon1990/js-utilities`
+
 ## ObjectUtil
 * `isObject(value)` - Checks if a value is an object and not array
 * `overwrite(fromObject, toObject)` - Replaces all the values of one objects with another object
