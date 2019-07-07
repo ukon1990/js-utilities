@@ -10,17 +10,21 @@ export class TextUtil {
     }
 
     public static contains(source: string, contains: string): boolean {
-        if (EmptyUtil.isNullOrUndefined(source) || EmptyUtil.isNullOrUndefined(contains)) {
+        if (TextUtil.isSourceOrContainsNullOrUndefined(source, contains)) {
             return false;
         }
         return source.toLowerCase().indexOf(contains.toLowerCase()) > -1;
     }
 
     public static getIndexOf(source: string, contains: string): number {
-        if (!source || !contains) {
+        if (TextUtil.isSourceOrContainsNullOrUndefined(source, contains)) {
             return -1;
         }
         return source.toLowerCase().indexOf(contains.toLowerCase());
+    }
+
+    private static isSourceOrContainsNullOrUndefined(source: string, contains: string): boolean {
+        return EmptyUtil.isNullOrUndefined(source) || EmptyUtil.isNullOrUndefined(contains);
     }
 
     public static getMatchingParts(string: string, matchingString: string): Match {

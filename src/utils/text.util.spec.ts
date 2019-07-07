@@ -33,8 +33,34 @@ describe('TextUtil', () => {
         });
 
 
-        it('Identical texts report positive', () => {
+        it('Identical texts report positive for identical texts', () => {
             expect(TextUtil.contains('The origin', 'The origin')).toBeTruthy();
+        });
+
+        it('Does not care about upper or lower case', () => {
+            expect(TextUtil.contains('THIS IS A TEST', 'is')).toBeTruthy();
+        });
+
+        it('numbers are ok', () => {
+            expect(TextUtil.contains('300', '30')).toBeTruthy();
+        });
+    });
+
+    describe('getIndexOf', () => {
+        it('Can get the index of a string, regardless of case', () => {
+            expect(TextUtil.getIndexOf('Hei', 'i')).toBe(2);
+            expect(TextUtil.getIndexOf('Hei', 'I')).toBe(2);
+        });
+
+        it('Returns false if not found', () => {
+            expect(TextUtil.getIndexOf('Stuff', 'Nope')).toBe(-1);
+        });
+
+        it('Returns false if not found', () => {
+            expect(TextUtil.getIndexOf('Stuff', undefined)).toBe(-1);
+            expect(TextUtil.getIndexOf(null, undefined)).toBe(-1);
+            expect(TextUtil.getIndexOf(undefined, undefined)).toBe(-1);
+            expect(TextUtil.getIndexOf(undefined, '')).toBe(-1);
         });
     });
 });

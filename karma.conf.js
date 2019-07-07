@@ -25,12 +25,11 @@ module.exports = function (config) {
         compilerOptions: {
             target: "ES2015",
             lib: ["es5", "es6", "es2015", "dom"]
-        },
-        tsconfig: "tsconfig.json"
+        }
     },
       coverageIstanbulReporter: {
         dir: require('path').join(__dirname, './coverage/projects'),
-        reports: ['html', 'text-summary'],
+        reports: ['html', 'lcovonly', 'text-summary'],
         fixWebpackSourcePaths: true,
         thresholds: {
           statements: 80,
@@ -39,7 +38,7 @@ module.exports = function (config) {
           functions: 80
         }
       },
-      reporters: ['progress', 'kjhtml', 'coverage-istanbul'],
+      reporters: ['progress', 'kjhtml'], // 'karma-coverage-istanbul-reporter'
       port: 9876,
       colors: true,
       logLevel: config.LOG_INFO,
