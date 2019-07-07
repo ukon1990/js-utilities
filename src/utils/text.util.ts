@@ -3,24 +3,24 @@ import {EmptyUtil} from "./empty.util";
 
 export class TextUtil {
     public static isEmpty(source: string | any): boolean {
-        if (!source) return true;
+        if (!source && isNaN(source)) return true;
         if (source === null) return true;
         if (source.length === 0) return true;
         return false;
     }
 
-    public static contains(source: string, target: string): boolean {
-        if (EmptyUtil.isNullOrUndefined(source) || EmptyUtil.isNullOrUndefined(target)) {
+    public static contains(source: string, contains: string): boolean {
+        if (EmptyUtil.isNullOrUndefined(source) || EmptyUtil.isNullOrUndefined(contains)) {
             return false;
         }
-        return source.toLowerCase().indexOf(target.toLowerCase()) > -1;
+        return source.toLowerCase().indexOf(contains.toLowerCase()) > -1;
     }
 
-    public static getIndexOf(source: string, target: string): number {
-        if (!source || !target) {
+    public static getIndexOf(source: string, contains: string): number {
+        if (!source || !contains) {
             return -1;
         }
-        return source.toLowerCase().indexOf(target.toLowerCase());
+        return source.toLowerCase().indexOf(contains.toLowerCase());
     }
 
     public static getMatchingParts(string: string, matchingString: string): Match {
