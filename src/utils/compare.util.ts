@@ -11,7 +11,7 @@ export class CompareUtil {
 
         if (CompareUtil.isNullOrUndefined(value1, value2)) {
             CompareUtil.handleNullOrUndefined(key, value1, value2, differences);
-        } else if (ObjectUtil.isObject(value1)) {
+        } else if (ArrayUtil.isArray(value1)) {
             const childDifference = new Difference(
                 key, value1, value2, ArrayUtil.getDifference(value1, value2));
 

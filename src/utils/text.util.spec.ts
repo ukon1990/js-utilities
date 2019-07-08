@@ -82,7 +82,23 @@ describe('TextUtil', () => {
         });
     });
 
-    describe('setFirstMatchPartAndIndex', () => {});
+    describe('setFirstMatchPartAndIndex', () => {
+        it('something', () => {
+            expect(TextUtil['setFirstMatchPartAndIndex'](
+                0,
+                'Searching in',
+                'e',
+                new Match('', '', ''))).toEqual(1);
+        });
+
+        it('something', () => {
+            expect(TextUtil['setFirstMatchPartAndIndex'](
+                0,
+                'Searching in',
+                'S',
+                new Match('', '', ''))).toEqual(0);
+        });
+    });
 
     describe('setMatchingParts', () => {});
 

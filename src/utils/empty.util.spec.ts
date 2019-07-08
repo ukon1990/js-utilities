@@ -4,10 +4,12 @@ describe('EmptyUtil', () => {
     describe('isNullOrUndefined', () => {
         it('Null returns true', () => {
             expect(EmptyUtil.isNullOrUndefined(null)).toBeTruthy();
+            expect(EmptyUtil.isNullOrUndefined(null, null)).toBeTruthy();
         });
 
         it('Undefined returns true', () => {
             expect(EmptyUtil.isNullOrUndefined(undefined)).toBeTruthy();
+            expect(EmptyUtil.isNullOrUndefined(undefined, undefined)).toBeTruthy();
         });
 
         it('Anything else returns as false', () => {

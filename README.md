@@ -27,3 +27,7 @@ looks like this `{start: 'Chi', match: 'ck', end: 'en'}`.
 * `getIndexOf(sourceString, targetString)` - Is basically `sourceString.toLowerCase().indexOf(targetString.toLowerCase)`
 * `contains(sourceString, targetString)` - Checks if a string exists within another. This is case-insensitive.
 * `isLowerCase(string)` - Checks if a string is upper or lowercase.
+
+## EmptyUtil
+* `isNullOrUndefined(value, value?)` - Checks if all the input is null or undefined.
+* `isAPopulatedArrayOrObject(value)` - Checks if a value is a populated array or object

@@ -15,6 +15,12 @@ export class ObjectUtil {
         return ObjectUtil.isObject(value) && Object.keys(value).length > 0;
     }
 
+    /**
+     * Overwrites the values in the "to" object, with values on 
+     * the same key as the "from" object.
+     * @param from Object to copy values from
+     * @param to Object to overwrite existing values from
+     */
     public static overwrite(from: object | any, to: object | any): void {
         if (EmptyUtil.isNullOrUndefined(from)) {
             console.error( 'Could not overwrite an object because the source is null or undefined');
@@ -52,7 +58,7 @@ export class ObjectUtil {
         return obj;
     }
 
-    private static cloneField(object: any, key: string, targetObject: any) {
+    private static cloneField(object: any, key: string, targetObject: any | any[]) {
         if (ArrayUtil.isArray(object[key])) {
             targetObject[key] = ArrayUtil.clone(object[key]);
         } else if (ObjectUtil.isObject(object[key])) {
@@ -62,6 +68,12 @@ export class ObjectUtil {
         }
     }
 
+    /**
+     * An alternative to using JSON.stringify for comparing two objects.
+     * Stringify can some times have issues with certain objects.
+     * @param object1 
+     * @param object2 
+     */
     public static isEqual(object1: object, object2: object): boolean {
         return ObjectUtil.getDifference(object1, object2).length === 0;
     }
@@ -70,7 +82,7 @@ export class ObjectUtil {
         const differences = new Array<Difference>(),
             onlyFieldsMap = new Map<string, boolean>();
 
-        if (ArrayUtil.isArray(ignoreFields)) {
+        if (ignoreFields && ArrayUtil.isArray(ignoreFields)) {
             let fields = new Map<string, boolean>();
             ignoreFields
                 .forEach((field: string) =>

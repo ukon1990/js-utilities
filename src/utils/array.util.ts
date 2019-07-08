@@ -27,7 +27,7 @@ export class ArrayUtil {
         return newArray;
     }
 
-    private static cloneField(value: any, newArray: any) {
+    private static cloneField(value: any, newArray: any[]) {
         if (ArrayUtil.isArray(value)) {
             newArray.push(ArrayUtil.clone(value));
         } else if (ObjectUtil.isObject(value)) {
