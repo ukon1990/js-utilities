@@ -1,4 +1,5 @@
 import { TextUtil } from "./text.util";
+import { Match } from "../models/match.model";
 
 describe('TextUtil', () => {
     describe('isEmpty', () => {
@@ -61,6 +62,37 @@ describe('TextUtil', () => {
             expect(TextUtil.getIndexOf(null, undefined)).toBe(-1);
             expect(TextUtil.getIndexOf(undefined, undefined)).toBe(-1);
             expect(TextUtil.getIndexOf(undefined, '')).toBe(-1);
+        });
+    });
+
+    describe('getMatchingParts', () => {
+        it('is case insensitive', () => {
+          expect(TextUtil.getMatchingParts('OREGAMI', 'ga')).toEqual(new Match('ORE', 'GA', 'MI'));
+        });
+
+        it('Returns emtpy match if the string is undefined or null', () => {
+            expect(TextUtil.getMatchingParts(undefined, 'ga')).toEqual(new Match('', '', ''));
+            expect(TextUtil.getMatchingParts(null, 'ga')).toEqual(new Match('', '', ''));
+        });
+
+        it('If the query string is undefined, empty or null it returns the whole thing at the "end" variable', () => {
+            expect(TextUtil.getMatchingParts('OREGAMI', undefined)).toEqual(new Match('', '', 'OREGAMI'));
+            expect(TextUtil.getMatchingParts('OREGAMI', null)).toEqual(new Match('', '', 'OREGAMI'));
+            expect(TextUtil.getMatchingParts('OREGAMI', '')).toEqual(new Match('', '', 'OREGAMI'));
+        });
+    });
+
+    describe('setFirstMatchPartAndIndex', () => {});
+
+    describe('setMatchingParts', () => {});
+
+    describe('isLowerCase', () => {
+        it('Text with uppercase in it is not lowercase', () => {
+            expect(TextUtil.isLowerCase('Hello')).toBeFalsy();
+        });
+
+        it('Text with lowercase is lowercase', () => {
+            expect(TextUtil.isLowerCase('hello')).toBeTruthy();
         });
     });
 });

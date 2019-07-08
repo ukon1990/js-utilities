@@ -10,6 +10,10 @@ export class ArrayUtil {
             value.forEach && value.push;
     }
 
+    public static isPopulatedArray(value: any): boolean {
+        return ArrayUtil.isArray(value) && Object.keys(value).length > 0;
+    }
+
     public static clone(array: Array<any>): Array<any> {
         if (EmptyUtil.isNullOrUndefined(array)) {
             console.error('Could not clone an array because it is null or undefined');

@@ -11,6 +11,10 @@ export class ObjectUtil {
             !value.forEach && !value.push;
     }
 
+    public static isPopulatedObject(value: any): boolean {
+        return ObjectUtil.isObject(value) && Object.keys(value).length > 0;
+    }
+
     public static overwrite(from: object | any, to: object | any): void {
         if (EmptyUtil.isNullOrUndefined(from)) {
             console.error( 'Could not overwrite an object because the source is null or undefined');

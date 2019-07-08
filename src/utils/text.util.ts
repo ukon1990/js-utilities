@@ -34,6 +34,10 @@ export class TextUtil {
         if (EmptyUtil.isNullOrUndefined(string)) {
             return match;
         }
+        
+        if (EmptyUtil.isNullOrUndefined(matchingString)) {
+            matchingString = '';
+        }
 
         firstIndex = TextUtil.setFirstMatchPartAndIndex(
             firstIndex, string, matchingString, match);

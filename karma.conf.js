@@ -29,7 +29,7 @@ module.exports = function (config) {
     },
       coverageIstanbulReporter: {
         dir: require('path').join(__dirname, './coverage/projects'),
-        reports: ['html', 'lcovonly', 'text-summary'],
+        reports: ['text-summary'], // 'html', 'lcovonly', 
         fixWebpackSourcePaths: true,
         thresholds: {
           statements: 80,
@@ -38,7 +38,7 @@ module.exports = function (config) {
           functions: 80
         }
       },
-      reporters: ['progress', 'kjhtml'], // 'karma-coverage-istanbul-reporter'
+      reporters: ['progress', 'kjhtml', 'coverage-istanbul'], // 'karma-coverage-istanbul-reporter'
       port: 9876,
       colors: true,
       logLevel: config.LOG_INFO,

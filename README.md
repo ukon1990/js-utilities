@@ -5,6 +5,7 @@ To install: `npm i @ukon1990/js-utilities`
 
 ## ObjectUtil
 * `isObject(value)` - Checks if a value is an object and not array
+* `isPopulatedObject(value)` - Returns true if an object is populated
 * `overwrite(fromObject, toObject)` - Replaces all the values of one objects with another object
 * `clone(object)` - Returns a cloned version of an object. Removing all child object references.
 * `isEqual(object1, object2)` - Checks if two objects are equal regardless of object reference.
@@ -12,6 +13,7 @@ To install: `npm i @ukon1990/js-utilities`
 
 ## ArrayUtil
 * `isObject(value)` - Checks if a value is an object and not array
+* `isPopulatedArray(value)` - Returns true if an array is populated
 * `overwrite(fromArray, toArray)` - Replaces all the values of one array with another array
 * `clone(array)` - Returns a cloned version of an array. Removing all child object references.
 * `isEqual(array1, array2)` - Checks if two arrays are equal regardless of object reference.
