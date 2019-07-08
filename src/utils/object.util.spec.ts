@@ -26,4 +26,20 @@ describe('ObjectUtil', () => {
             expect(ObjectUtil.isPopulatedObject({})).toBeFalsy();
         });
     });
+
+    describe('overwrite', () => {
+        it('Can overwrite one object with another', () => {
+            const obj = {};
+            const obj2 = {};
+            expect();
+        });
+    });
+
+    describe('overwriteField', () => {});
+
+    describe('clone', () => {});
+
+    describe('isEqual', () => {});
+
+    describe('getDifference', () => {});
 });

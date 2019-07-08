@@ -32,10 +32,10 @@ module.exports = function (config) {
         reports: ['text-summary'], // 'html', 'lcovonly', 
         fixWebpackSourcePaths: true,
         thresholds: {
-          statements: 25,
-          lines: 25,
-          branches: 25,
-          functions: 25
+          statements: 80,
+          lines: 80,
+          branches: 80,
+          functions:80
         }
       },
       reporters: ['progress', 'kjhtml', 'coverage-istanbul'], // 'karma-coverage-istanbul-reporter'
