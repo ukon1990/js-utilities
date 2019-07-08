@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc",
     "test": "karma start",
+    "headless-test": "karma start --single-run --no-auto-watch --no-sandbox --browsers ChromeHeadless",
     "deploy": "tsc && npm publish --access public"
   },
   "keywords": [
