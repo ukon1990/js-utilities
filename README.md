@@ -3,6 +3,8 @@ This is a small package with some utilities.
 
 To install: `npm i @ukon1990/js-utilities`
 
+Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/tree/master.svg?style=svg)](https://circleci.com/gh/ukon1990/js-utilities/tree/master)
+
 ## ObjectUtil
 * `isObject(value)` - Checks if a value is an object and not array
 * `isPopulatedObject(value)` - Returns true if an object is populated

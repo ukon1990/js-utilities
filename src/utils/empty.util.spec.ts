@@ -22,4 +22,17 @@ describe('EmptyUtil', () => {
             expect(EmptyUtil.isNullOrUndefined([])).toBeFalsy();
         });
     });
+
+    it('isAPopulatedArrayOrObject', () => {
+        expect(EmptyUtil.isAPopulatedArrayOrObject({name: ''})).toBeTruthy();
+        expect(EmptyUtil.isAPopulatedArrayOrObject([''])).toBeTruthy();
+
+        expect(EmptyUtil.isAPopulatedArrayOrObject({})).toBeFalsy();
+        expect(EmptyUtil.isAPopulatedArrayOrObject([])).toBeFalsy();
+        expect(EmptyUtil.isAPopulatedArrayOrObject(null)).toBeFalsy();
+        expect(EmptyUtil.isAPopulatedArrayOrObject(undefined)).toBeFalsy();
+        expect(EmptyUtil.isAPopulatedArrayOrObject(NaN)).toBeFalsy();
+        expect(EmptyUtil.isAPopulatedArrayOrObject(0)).toBeFalsy();
+        expect(EmptyUtil.isAPopulatedArrayOrObject('')).toBeFalsy();
+    });
 });

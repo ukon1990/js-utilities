@@ -5,6 +5,7 @@ import {CompareUtil} from "./compare.util";
 
 export class ObjectUtil {
 
+
     public static isObject(value: any): boolean {
         return !EmptyUtil.isNullOrUndefined(value) &&
             typeof value === 'object' &&
@@ -16,14 +17,14 @@ export class ObjectUtil {
     }
 
     /**
-     * Overwrites the values in the "to" object, with values on 
+     * Overwrites the values in the "to" object, with values on
      * the same key as the "from" object.
      * @param from Object to copy values from
      * @param to Object to overwrite existing values from
      */
     public static overwrite(from: object | any, to: object | any): void {
         if (EmptyUtil.isNullOrUndefined(from)) {
-            console.error( 'Could not overwrite an object because the source is null or undefined');
+            console.error('Could not overwrite an object because the source is null or undefined');
             return;
         }
 
@@ -71,8 +72,8 @@ export class ObjectUtil {
     /**
      * An alternative to using JSON.stringify for comparing two objects.
      * Stringify can some times have issues with certain objects.
-     * @param object1 
-     * @param object2 
+     * @param object1
+     * @param object2
      */
     public static isEqual(object1: object, object2: object): boolean {
         return ObjectUtil.getDifference(object1, object2).length === 0;
@@ -86,13 +87,13 @@ export class ObjectUtil {
             let fields = new Map<string, boolean>();
             ignoreFields
                 .forEach((field: string) =>
-                fields.set(field, true));
+                    fields.set(field, true));
             ignoreFields = fields;
         }
 
         if (onlyFields) {
             onlyFields.forEach((field: string) =>
-            onlyFieldsMap.set(field, true));
+                onlyFieldsMap.set(field, true));
         }
 
         if (EmptyUtil.isNullOrUndefined(object1) || EmptyUtil.isNullOrUndefined(object2)) {

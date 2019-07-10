@@ -1,6 +1,5 @@
 import {ObjectUtil} from './object.util';
 import {Difference} from "../models/difference.model";
-import {EmptyUtil} from "./empty.util";
 import {ArrayUtil} from "./array.util";
 
 export class CompareUtil {
@@ -61,7 +60,7 @@ export class CompareUtil {
             (CompareUtil.isEmptyString(value1, value2) && (CompareUtil.isNull(value1, value2) || CompareUtil.isUndefined(value1, value2)));
     }
 
-    private static isEmptyString(value1: any, value2: any): boolean {
+    private static isEmptyString(value1: any, value2?: any): boolean {
         return value1 === '' || value2 === '';
     }
 }
