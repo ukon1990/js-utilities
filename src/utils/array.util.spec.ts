@@ -1,4 +1,4 @@
-import {ArrayUtil} from "./array.util";
+import {ArrayUtil} from './array.util';
 
 describe('ArrayUtil', () => {
     describe('isArray', () => {
@@ -57,7 +57,7 @@ describe('ArrayUtil', () => {
             ];
             const list2 = [];
 
-            ArrayUtil['cloneField'](list[0], list2);
+            ArrayUtil.cloneField(list[0], list2);
 
             expect(list2[0]).toEqual(list[0]);
             expect(list2[0] === list[0]).toBeFalsy();
@@ -70,7 +70,7 @@ describe('ArrayUtil', () => {
             ];
             const list2 = [];
 
-            ArrayUtil['cloneField'](list[0], list2);
+            ArrayUtil.cloneField(list[0], list2);
 
             expect(list2[0]).toEqual(list[0]);
             expect(list2[0] === list[0]).toBeFalsy();
@@ -80,7 +80,7 @@ describe('ArrayUtil', () => {
             const list = [1, 2];
             const list2 = [];
 
-            ArrayUtil['cloneField'](list[0], list2);
+            ArrayUtil.cloneField(list[0], list2);
 
             expect(list2[0]).toEqual(list[0]);
         });
@@ -96,5 +96,5 @@ describe('ArrayUtil', () => {
             expect(ArrayUtil.getDifference(['1', 2, 3], ['1', 2]).length).toBeTruthy();
             expect(ArrayUtil.isEqual(['1', 2, 3], ['1', 2])).toBeFalsy();
         });
-    })
+    });
 });

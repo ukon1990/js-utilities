@@ -1,5 +1,5 @@
-import { TextUtil } from "./text.util";
-import { Match } from "../models/match.model";
+import { TextUtil } from './text.util';
+import { Match } from '../models/match.model';
 
 describe('TextUtil', () => {
     describe('isEmpty', () => {
@@ -84,7 +84,7 @@ describe('TextUtil', () => {
 
     describe('setFirstMatchPartAndIndex', () => {
         it('something', () => {
-            expect(TextUtil['setFirstMatchPartAndIndex'](
+            expect(TextUtil.setFirstMatchPartAndIndex(
                 0,
                 'Searching in',
                 'e',
@@ -92,7 +92,7 @@ describe('TextUtil', () => {
         });
 
         it('something', () => {
-            expect(TextUtil['setFirstMatchPartAndIndex'](
+            expect(TextUtil.setFirstMatchPartAndIndex(
                 0,
                 'Searching in',
                 'S',

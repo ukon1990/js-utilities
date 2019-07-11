@@ -1,11 +1,11 @@
 import {Match} from '../models/match.model';
-import {EmptyUtil} from "./empty.util";
+import {EmptyUtil} from './empty.util';
 
 export class TextUtil {
     public static isEmpty(source: string | any): boolean {
-        if (!source && isNaN(source)) return true;
-        if (source === null) return true;
-        if (source.length === 0) return true;
+        if (!source && isNaN(source)) { return true; }
+        if (source === null) { return true; }
+        if (source.length === 0) { return true; }
         return false;
     }
 
@@ -34,7 +34,7 @@ export class TextUtil {
         if (EmptyUtil.isNullOrUndefined(string)) {
             return match;
         }
-        
+
         if (EmptyUtil.isNullOrUndefined(matchingString)) {
             matchingString = '';
         }

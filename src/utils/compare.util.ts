@@ -1,6 +1,6 @@
 import {ObjectUtil} from './object.util';
-import {Difference} from "../models/difference.model";
-import {ArrayUtil} from "./array.util";
+import {Difference} from '../models/difference.model';
+import {ArrayUtil} from './array.util';
 
 export class CompareUtil {
     static setDifferences(key: any, value1: any, value2: any, differences: Array<Difference>): void {

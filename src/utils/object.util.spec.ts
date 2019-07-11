@@ -1,4 +1,4 @@
-import {ObjectUtil} from "./object.util";
+import {ObjectUtil} from './object.util';
 
 describe('ObjectUtil', () => {
 
@@ -71,7 +71,7 @@ describe('ObjectUtil', () => {
                     {name: 'Paul'}
                 ]
             };
-            ObjectUtil['cloneField'](obj2, 'list', obj);
+            ObjectUtil.cloneField(obj2, 'list', obj);
 
             expect(obj).toEqual(obj2);
             expect(obj === obj2).toBeFalsy();
@@ -80,7 +80,7 @@ describe('ObjectUtil', () => {
         it('Object', () => {
             const obj = {child: {name: 'Draugen'}};
             const obj2 = {child: {name: 'Frøya'}};
-            ObjectUtil['cloneField'](obj2, 'child', obj);
+            ObjectUtil.cloneField(obj2, 'child', obj);
 
             expect(obj).toEqual(obj2);
             expect(obj === obj2).toBeFalsy();
@@ -89,7 +89,7 @@ describe('ObjectUtil', () => {
         it('Field', () => {
             const obj = {name: 'Odin'};
             const obj2 = {name: 'Loke'};
-            ObjectUtil['cloneField'](obj2, 'name', obj);
+            ObjectUtil.cloneField(obj2, 'name', obj);
 
             expect(obj).toEqual(obj2);
             expect(obj === obj2).toBeFalsy();
