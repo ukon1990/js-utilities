@@ -49,43 +49,6 @@ describe('ArrayUtil', () => {
         });
     });
 
-    describe('cloneField', () => {
-        it('can clone an object from within an array field', () => {
-            const list = [
-                {vava: 'vavava'},
-                {val: 'v'}
-            ];
-            const list2 = [];
-
-            ArrayUtil.cloneField(list[0], list2);
-
-            expect(list2[0]).toEqual(list[0]);
-            expect(list2[0] === list[0]).toBeFalsy();
-        });
-
-        it('can clone an array from within an array field', () => {
-            const list = [
-                [1, 2],
-                [3, 4]
-            ];
-            const list2 = [];
-
-            ArrayUtil.cloneField(list[0], list2);
-
-            expect(list2[0]).toEqual(list[0]);
-            expect(list2[0] === list[0]).toBeFalsy();
-        });
-
-        it('can clone an value from within an array field', () => {
-            const list = [1, 2];
-            const list2 = [];
-
-            ArrayUtil.cloneField(list[0], list2);
-
-            expect(list2[0]).toEqual(list[0]);
-        });
-    });
-
     describe('getDifference && isEqual', () => {
         it('Identical arrays', () => {
             expect(ArrayUtil.getDifference(['1', 2], ['1', 2]).length).toBeFalsy();

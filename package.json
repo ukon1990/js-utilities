@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "ng test",
+    "test": "ng test --code-coverage",
     "headless-test": "ng test --watch=false --browsers ChromeHeadless --code-coverage",
     "deploy": "npm run headless-test && tsc && npm publish --access public"
   },

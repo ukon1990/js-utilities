@@ -57,45 +57,6 @@ describe('ObjectUtil', () => {
         });
     });
 
-    describe('overwriteField', () => {
-        it('Array', () => {
-            const obj = {
-                list: [
-                    {name: 'Paul'},
-                    {name: 'Traug'}
-                ]
-            };
-            const obj2 = {
-                list: [
-                    {name: 'Traug'},
-                    {name: 'Paul'}
-                ]
-            };
-            ObjectUtil.cloneField(obj2, 'list', obj);
-
-            expect(obj).toEqual(obj2);
-            expect(obj === obj2).toBeFalsy();
-        });
-
-        it('Object', () => {
-            const obj = {child: {name: 'Draugen'}};
-            const obj2 = {child: {name: 'Frøya'}};
-            ObjectUtil.cloneField(obj2, 'child', obj);
-
-            expect(obj).toEqual(obj2);
-            expect(obj === obj2).toBeFalsy();
-        });
-
-        it('Field', () => {
-            const obj = {name: 'Odin'};
-            const obj2 = {name: 'Loke'};
-            ObjectUtil.cloneField(obj2, 'name', obj);
-
-            expect(obj).toEqual(obj2);
-            expect(obj === obj2).toBeFalsy();
-        });
-    });
-
     describe('clone', () => {
         it('Returns the object as is if null or undefined', () => {
         });
