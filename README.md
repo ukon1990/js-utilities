@@ -33,3 +33,8 @@ looks like this `{start: 'Chi', match: 'ck', end: 'en'}`.
 ## EmptyUtil
 * `isNullOrUndefined(value, value?)` - Checks if all the input is null or undefined.
 * `isAPopulatedArrayOrObject(value)` - Checks if a value is a populated array or object
+
+## DateUtil
+* `getDifference`
+* `getDifferenceInMS`
+* `timeSince`

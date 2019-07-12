@@ -1,4 +1,4 @@
-import { EmptyUtil } from "./empty.util";
+import { EmptyUtil } from './empty.util';
 
 describe('EmptyUtil', () => {
     describe('isNullOrUndefined', () => {

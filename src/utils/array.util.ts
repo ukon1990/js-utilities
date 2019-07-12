@@ -1,7 +1,7 @@
-import {EmptyUtil} from "./empty.util";
-import {ObjectUtil} from "./object.util";
-import {Difference} from "../models/difference.model";
-import {CompareUtil} from "./compare.util";
+import {EmptyUtil} from './empty.util';
+import {ObjectUtil} from './object.util';
+import {Difference} from '../models/difference.model';
+import {CompareUtil} from './compare.util';
 
 export class ArrayUtil {
     public static isArray(value: any): boolean {

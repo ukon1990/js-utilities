@@ -1,5 +1,5 @@
-import {ArrayUtil} from "./array.util";
-import {ObjectUtil} from "./object.util";
+import {ArrayUtil} from './array.util';
+import {ObjectUtil} from './object.util';
 
 export class EmptyUtil {
     public static isNullOrUndefined(value: any, value2?: any): boolean {

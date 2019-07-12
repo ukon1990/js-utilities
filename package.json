@@ -1,12 +1,12 @@
 {
   "name": "@ukon1990/js-utilities",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A light weight package for object and array manipulation. As well as some utilities for matching text.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "ng test",
+    "test": "ng test --code-coverage",
     "headless-test": "ng test --watch=false --browsers ChromeHeadless --code-coverage",
     "deploy": "npm run headless-test && tsc && npm publish --access public"
   },

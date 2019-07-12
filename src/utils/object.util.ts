@@ -1,7 +1,7 @@
-import {EmptyUtil} from "./empty.util";
-import {ArrayUtil} from "./array.util";
-import {Difference} from "../models/difference.model";
-import {CompareUtil} from "./compare.util";
+import {EmptyUtil} from './empty.util';
+import {ArrayUtil} from './array.util';
+import {Difference} from '../models/difference.model';
+import {CompareUtil} from './compare.util';
 
 export class ObjectUtil {
 
@@ -84,7 +84,7 @@ export class ObjectUtil {
             onlyFieldsMap = new Map<string, boolean>();
 
         if (ignoreFields && ArrayUtil.isArray(ignoreFields)) {
-            let fields = new Map<string, boolean>();
+            const fields = new Map<string, boolean>();
             ignoreFields
                 .forEach((field: string) =>
                     fields.set(field, true));

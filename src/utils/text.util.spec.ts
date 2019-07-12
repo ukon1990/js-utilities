@@ -1,5 +1,5 @@
-import { TextUtil } from "./text.util";
-import { Match } from "../models/match.model";
+import { TextUtil } from './text.util';
+import { Match } from '../models/match.model';
 
 describe('TextUtil', () => {
     describe('isEmpty', () => {
@@ -79,24 +79,6 @@ describe('TextUtil', () => {
             expect(TextUtil.getMatchingParts('OREGAMI', undefined)).toEqual(new Match('', '', 'OREGAMI'));
             expect(TextUtil.getMatchingParts('OREGAMI', null)).toEqual(new Match('', '', 'OREGAMI'));
             expect(TextUtil.getMatchingParts('OREGAMI', '')).toEqual(new Match('', '', 'OREGAMI'));
-        });
-    });
-
-    describe('setFirstMatchPartAndIndex', () => {
-        it('something', () => {
-            expect(TextUtil['setFirstMatchPartAndIndex'](
-                0,
-                'Searching in',
-                'e',
-                new Match('', '', ''))).toEqual(1);
-        });
-
-        it('something', () => {
-            expect(TextUtil['setFirstMatchPartAndIndex'](
-                0,
-                'Searching in',
-                'S',
-                new Match('', '', ''))).toEqual(0);
         });
     });
 
