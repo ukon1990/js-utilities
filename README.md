@@ -35,6 +35,10 @@ looks like this `{start: 'Chi', match: 'ck', end: 'en'}`.
 * `isAPopulatedArrayOrObject(value)` - Checks if a value is a populated array or object
 
 ## DateUtil
-* `getDifference`
-* `getDifferenceInMS`
-* `timeSince`
+* `getDifferenceInMS` - Returns the difference between two dates in milliseconds
+* `getDifferenceInSeconds` - Returns the difference between two dates in milliseconds
+* `getDifferenceInMinutes` - Returns the difference between two dates in milliseconds
+* `getDifferenceInHours` - Returns the difference between two dates in milliseconds
+* `getDifferenceInDays` - Returns the difference between two dates in milliseconds
+* `getDifferenceInWeeks` - Returns the difference between two dates in milliseconds
+* `timeSince` - Returns the time since a provided date. The second parameter can be empty(defaults to ms) or `s`/`seconds`, `m`/`minutes`, `h`/`hours`, `d`/`days`, `w`/`weeks`.

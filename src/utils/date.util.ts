@@ -43,8 +43,27 @@ export class DateUtil {
         return Math.floor(DateUtil.getDifferenceInMS(from, to) / 1000);
     }
 
-    public static timeSince(date: Date): number {
-        return 0;
+    public static timeSince(date: Date | number, timeUnit: string = 'ms'): number {
+        const now = new Date();
+        switch(timeUnit) {
+            case 'w':
+            case 'weeks':
+                return DateUtil.getDifferenceInWeeks(date, now);
+            case 'd':
+            case 'days':
+                return DateUtil.getDifferenceInDays(date, now);
+            case 'h':
+            case 'hours':
+                return DateUtil.getDifferenceInHours(date, now);
+            case 'm':
+            case 'minutes':
+                return DateUtil.getDifferenceInMinutes(date, now);
+            case 's':
+            case 'seconds':
+                return DateUtil.getDifferenceInSeconds(date, now);
+            default:
+                return DateUtil.getDifferenceInMS(date, now);
+        }
     }
 
     public static getDifferenceInMinutes(from: Date | number, to: Date | number) {
