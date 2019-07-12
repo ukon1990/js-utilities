@@ -14,12 +14,15 @@ Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/
 * `getDifference(object1, object2)` - Returns an array of object differences as `Difference` objects.
 
 ## ArrayUtil
-* `isObject(value)` - Checks if a value is an object and not array
+* `isArray(value)` - Checks if a value is an object and not array
 * `isPopulatedArray(value)` - Returns true if an array is populated
-* `overwrite(fromArray, toArray)` - Replaces all the values of one array with another array
 * `clone(array)` - Returns a cloned version of an array. Removing all child object references.
 * `isEqual(array1, array2)` - Checks if two arrays are equal regardless of object reference.
 * `getDifference(array1, array2)` - Returns an array of differences as `Difference` objects.
+* `removeObject(value, fromArray)` - Removes all entries that is identical to a value from an array, regardless of the object reference.
+* `removeObjects(values, fromArray)` - Removes multiple objects/values from an array.
+* `removeIndexes(indexes, fromArray)` - Removes the elements from an array at the supplied index locations
+* `removeDuplicates(fromArray)` - Remove all duplicate entries in an array.
 
 ## TextUtil
 * `isEmpty(string)` - Checks if a string is null, undefined or has a length of 0.
@@ -36,9 +39,9 @@ looks like this `{start: 'Chi', match: 'ck', end: 'en'}`.
 
 ## DateUtil
 * `getDifferenceInMS` - Returns the difference between two dates in milliseconds
-* `getDifferenceInSeconds` - Returns the difference between two dates in milliseconds
-* `getDifferenceInMinutes` - Returns the difference between two dates in milliseconds
-* `getDifferenceInHours` - Returns the difference between two dates in milliseconds
-* `getDifferenceInDays` - Returns the difference between two dates in milliseconds
-* `getDifferenceInWeeks` - Returns the difference between two dates in milliseconds
+* `getDifferenceInSeconds` - Returns the difference between two dates in seconds
+* `getDifferenceInMinutes` - Returns the difference between two dates in minutes
+* `getDifferenceInHours` - Returns the difference between two dates in hours
+* `getDifferenceInDays` - Returns the difference between two dates in days
+* `getDifferenceInWeeks` - Returns the difference between two dates in weeks
 * `timeSince` - Returns the time since a provided date. The second parameter can be empty(defaults to ms) or `s`/`seconds`, `m`/`minutes`, `h`/`hours`, `d`/`days`, `w`/`weeks`.

@@ -5,13 +5,18 @@ import {CompareUtil} from './compare.util';
 
 export class ObjectUtil {
 
-
+    /**
+     * Checks if a value is an object and not array
+     */
     public static isObject(value: any): boolean {
         return !EmptyUtil.isNullOrUndefined(value) &&
             typeof value === 'object' &&
             !value.forEach && !value.push;
     }
 
+    /**
+     * Returns true if an object is populated
+     */
     public static isPopulatedObject(value: any): boolean {
         return ObjectUtil.isObject(value) && Object.keys(value).length > 0;
     }
@@ -46,6 +51,9 @@ export class ObjectUtil {
         }
     }
 
+    /**
+     * Returns a cloned version of an object. Removing all child object references.
+     */
     public static clone(object: any): object {
         if (EmptyUtil.isNullOrUndefined(object)) {
             console.error('Could not clone an object because the source is null or undefined');
@@ -79,6 +87,13 @@ export class ObjectUtil {
         return ObjectUtil.getDifference(object1, object2).length === 0;
     }
 
+    /**
+     * Returns an array of object differences as `Difference` objects.
+     * @param object1 
+     * @param object2 
+     * @param ignoreFields The fields you wish to be ignored: e.g ['hobby', 'profession']
+     * @param onlyFields The fields you wish to be considered: e.g ['name', 'age']
+     */
     public static getDifference(object1: object | any, object2: object | any, ignoreFields?: any, onlyFields?: string[]): Array<Difference> {
         const differences = new Array<Difference>(),
             onlyFieldsMap = new Map<string, boolean>();
