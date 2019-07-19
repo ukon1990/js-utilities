@@ -1,7 +1,7 @@
 # Javascript utilities
 This is a small package with some utilities.
 
-To install: `npm i @ukon1990/js-utilities`
+To install: `npm i @ukon1990/js-utilities --save`
 
 Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/tree/master.svg?style=svg)](https://circleci.com/gh/ukon1990/js-utilities/tree/master)
 
