@@ -3,30 +3,46 @@ import {Difference} from '../models/difference.model';
 import {ArrayUtil} from './array.util';
 
 export class CompareUtil {
-    static setDifferences(key: any, value1: any, value2: any, differences: Array<Difference>): void {
+    static setDifferences(key: any, value1: any, value2: any, differences: Array<Difference>,
+                          checkForCyclicDependencies = true, parentStackMap?): void {
         if (CompareUtil.isNullAndUndefined(value1, value2)) {
             return;
         }
 
         if (CompareUtil.isNullOrUndefined(value1, value2)) {
-            CompareUtil.handleNullOrUndefined(key, value1, value2, differences);
+            this.handleNullOrUndefined(key, value1, value2, differences);
         } else if (ArrayUtil.isArray(value1)) {
-            const childDifference = new Difference(
-                key, value1, value2, ArrayUtil.getDifference(value1, value2));
-
-            if (CompareUtil.hasChildren(childDifference)) {
-                differences.push(childDifference);
-            }
+            this.handleArray(key, value1, value2, differences);
         } else if (ObjectUtil.isObject(value1)) {
-            const childDifference = new Difference(
-                key, value1, value2, ObjectUtil.getDifference(value1, value2));
-
-            if (CompareUtil.hasChildren(childDifference)) {
-                differences.push(childDifference);
-            }
+            this.handleObject(key, value1, value2, differences, checkForCyclicDependencies, parentStackMap);
         } else if (value1 !== value2) {
             differences.push(
                 new Difference(key, value1, value2));
+        }
+    }
+
+    private static handleArray(key: any, value1: any, value2: any, differences: Array<Difference>) {
+        const childDifference = new Difference(
+            key, value1, value2, ArrayUtil.getDifference(value1, value2));
+
+        if (CompareUtil.hasChildren(childDifference)) {
+            differences.push(childDifference);
+        }
+    }
+
+    private static handleObject(key: any, value1: any, value2: any, differences: Array<Difference>,
+                                checkForCyclicDependencies: boolean, parentStackMap: any) {
+        if (checkForCyclicDependencies) {
+            if (!parentStackMap) {
+                parentStackMap = [];
+            }
+        }
+
+        const childDifference = new Difference(
+            key, value1, value2, ObjectUtil.getDifference(value1, value2, checkForCyclicDependencies, parentStackMap));
+
+        if (CompareUtil.hasChildren(childDifference)) {
+            differences.push(childDifference);
         }
     }
 

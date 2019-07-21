@@ -86,5 +86,15 @@ describe('ObjectUtil', () => {
             expect(ObjectUtil.getDifference(obj1, obj2).length).toBeTruthy();
             expect(ObjectUtil.isEqual(obj1, obj2)).toBeFalsy();
         });
+
+        it('Circularity', () => {
+            const obj1 = {name: 'Hi', list: ['A', 'B', 'C'], easyAs: {oneTwoThree: 'Do re mi'}, circular: undefined};
+            obj1.circular = obj1;
+            const obj2 = {name: 'Hi', list: ['A', 'B', 'D'], easyAs: {oneTwoThree: 'Do re mi'}, circular: undefined};
+            obj2.circular = obj2;
+            expect(ObjectUtil.getDifference(obj1, obj2).length).toBeTruthy();
+            expect(ObjectUtil.isEqual(obj1, obj2)).toBeFalsy();
+            expect(ObjectUtil.getDifference(document, document).length).toBeFalsy();
+        });
     });
 });
