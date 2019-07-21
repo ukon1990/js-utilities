@@ -4,7 +4,6 @@
     "outDir": "./dist",
     "sourceMap": true,
     "declaration": true,
-    "one-variable-per-declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "module": "esnext",
