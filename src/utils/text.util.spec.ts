@@ -1,5 +1,5 @@
-import { TextUtil } from './text.util';
-import { Match } from '../models/match.model';
+import {TextUtil} from './text.util';
+import {Match} from '../models/match.model';
 
 describe('TextUtil', () => {
     describe('isEmpty', () => {
@@ -67,7 +67,7 @@ describe('TextUtil', () => {
 
     describe('getMatchingParts', () => {
         it('is case insensitive', () => {
-          expect(TextUtil.getMatchingParts('OREGAMI', 'ga')).toEqual(new Match('ORE', 'GA', 'MI'));
+            expect(TextUtil.getMatchingParts('OREGAMI', 'ga')).toEqual(new Match('ORE', 'GA', 'MI'));
         });
 
         it('Returns emtpy match if the string is undefined or null', () => {
@@ -82,7 +82,8 @@ describe('TextUtil', () => {
         });
     });
 
-    describe('setMatchingParts', () => {});
+    describe('setMatchingParts', () => {
+    });
 
     describe('isLowerCase', () => {
         it('Text with uppercase in it is not lowercase', () => {
@@ -91,6 +92,18 @@ describe('TextUtil', () => {
 
         it('Text with lowercase is lowercase', () => {
             expect(TextUtil.isLowerCase('hello')).toBeTruthy();
+        });
+    });
+
+    describe('csvToObjects', () => {
+        it('can generate object from csv', () => {
+            const csv = `name;age;location
+                Orochimaru;900;Somewhere
+                King Kong;34;India
+                Ubuhuru Kakadu;122;No idea`;
+            const list = TextUtil.csvToObjects<any>(csv, ';');
+            expect(list.length).toBe(3);
+            expect(list[1].age).toBe(34);
         });
     });
 });
