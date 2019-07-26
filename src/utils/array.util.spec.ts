@@ -60,4 +60,107 @@ describe('ArrayUtil', () => {
             expect(ArrayUtil.isEqual(['1', 2, 3], ['1', 2])).toBeFalsy();
         });
     });
+
+    describe('removeObject', () => {
+        it('Can remove multiples of identical objects from array', () => {
+            const object = {name: 'John', level: -1};
+            const object2 = {name: 'August', level: 30};
+            const array = [
+                {name: 'John', level: -1},
+                {name: 'August', level: 30},
+                {name: 'John', level: -1},
+                {name: 'Peter', level: '!cow'}
+            ];
+            ArrayUtil.removeObject(object, array);
+            expect(array.length).toBe(2);
+            expect(array[0]).toEqual(object2);
+        });
+        
+        it('Can remove multiples of identical strings from array', () => {
+            const object = {name: 'John', level: -1};
+            const array = [
+                'a', 'b', 'a', 'a', 'b'
+            ];
+            ArrayUtil.removeObject('a', array);
+            expect(array.length).toBe(2);
+        });
+
+
+        it('Can remove multiples of identical numbers from array', () => {
+            const object = {name: 'John', level: -1};
+            const array = [
+                0, 1, 0, 0, 1
+            ];
+            ArrayUtil.removeObject(1, array);
+            expect(array.length).toBe(3);
+        });
+
+
+        it('Can remove multiples of identical booleans from array', () => {
+            const object = {name: 'John', level: -1};
+            const array = [
+                true, false, true, true, false
+            ];
+            ArrayUtil.removeObject(false, array);
+            expect(array.length).toBe(3);
+        });
+    });
+
+    describe('removeObjects', () => {
+        it('Can remove multiples of identical objects from array', () => {
+            const object = {name: 'John', level: -1};
+            const object2 = {name: 'Peter', level: '!cow'};
+            const object3 = {name: 'August', level: 30};
+            const array = [
+                {name: 'John', level: -1},
+                {name: 'August', level: 30},
+                {name: 'John', level: -1},
+                {name: 'Peter', level: '!cow'}
+            ];
+            ArrayUtil.removeObjects([object, object2], array);
+            expect(array.length).toBe(1);
+            expect(array[0]).toEqual(object3);
+        });
+    });
+
+    describe('removeDuplicates', () => {
+        it('can remove duplicates', () => {
+            const array = [
+                {name: 'John', level: -1},
+                {name: 'August', level: 30},
+                {name: 'John', level: -1},
+                {name: 'Peter', level: '!cow'},
+                null,
+                undefined,
+                undefined,
+                true,
+                false,
+                1,
+                1,
+                [],
+                []
+            ];
+
+            ArrayUtil.removeDuplicates(array);
+            expect(array.length).toBe(9);
+        });
+    });
+
+    describe('removeIndexes', () => {
+       it('can remove multiple in random index order', () => {
+            const array = [
+                'a', // 0 - 0
+                'b', // 1 - x
+                'c', // 2 - x
+                'd', // 3 - 1
+                'e', // 4 - x
+                'f' // 5 - 2
+            ];
+            ArrayUtil.removeIndexes([1,4, 2], array);
+            expect(array.length).toBe(3);
+            expect(array[0]).toBe('a');
+            expect(array[1]).toBe('d');
+            expect(array[2]).toBe('f');
+       });
+    });
 });
