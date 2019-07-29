@@ -157,6 +157,49 @@ export class TextUtil {
     }
 
     /**
+     * Converts an array of objects to a CSV string.
+     * @param list an array of objects
+     * @param delimiter the separation character to use. If none are provided, comma will be used.
+     * @param useKeys The keys from the object to use. If not provided, all the keys will be used.
+     *                  Providing a list of keys will improve performance.
+     */
+    public static objectsToCSV(list: any[], delimiter: string = ',', useKeys?: string[]): string {
+        let body = '';
+        const keyMap = {};
+
+        if (useKeys) {
+            useKeys.forEach(key =>
+                keyMap[key] = true);
+        }
+
+        list.forEach((obj) =>
+            body = this.handleObjectToCSVRow(useKeys, obj, keyMap, delimiter, body));
+
+        useKeys = Object.keys(keyMap).map(key =>
+            this.camelCaseToSentence(key));
+
+        return `${
+            useKeys.join(delimiter)
+            }\n\r${
+            body}`;
+    }
+
+    private static handleObjectToCSVRow(useKeys: string[], obj, keyMap, delimiter: string, body: string) {
+        if (!useKeys) {
+            Object.keys(obj).forEach(key =>
+                keyMap[key] = true);
+        }
+        let row = '';
+        row += Object.keys(keyMap)
+            .map((key: string) =>
+                obj[key])
+            .join(delimiter);
+
+        body += row + '\n\r';
+        return body;
+    }
+
+    /**
      *
      * @param input The input string
      * @param delimiter whatever character the columns are separated by

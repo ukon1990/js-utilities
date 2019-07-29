@@ -116,6 +116,23 @@ describe('TextUtil', () => {
         });
     });
 
+    describe('objectsToCSV', () => {
+        it('can convert a list of objects with identical keys', () => {
+            const list = [
+                {name: 'John', age: 90},
+                {name: 'Aga', age: 12}
+            ];
+            expect(TextUtil.objectsToCSV(list, ';'))
+                .toEqual('Name;Age\n\r' +
+                    'John;90\n\r' +
+                    'Aga;12\n\r');
+            expect(TextUtil.objectsToCSV(list, ';', ['name']))
+                .toEqual('Name\n\r' +
+                    'John\n\r' +
+                    'Aga\n\r');
+        });
+    });
+
     describe('csvToObjects', () => {
         it('can generate object from csv', () => {
             const csv = 'Name;Age;Location;Is Human\n' +

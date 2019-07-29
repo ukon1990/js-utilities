@@ -36,6 +36,8 @@ Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/
 * `camelCaseToSentence(sentence)` - Converts a sentence of camelCase words into a sentence with spaces.
 * `csvToObjects(input, delimiter?, options?: {headerNames?: string[], types?: string[]})` - 
     Generates an array of objects from a CSV string.
+* `objectsToCSV(list, delimiter?: string = ',', useKeys?: string[])` - Converts a list of objects to a CSV string. If provided with the 
+keys that is supposed to be used from the objects, it will increase performance.
 
 ## EmptyUtil
 * `isNullOrUndefined(value, value?)` - Checks if all the input is null or undefined.
