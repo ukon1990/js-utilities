@@ -85,25 +85,49 @@ describe('TextUtil', () => {
     describe('setMatchingParts', () => {
     });
 
+    it('sentenceToCamelCase', () => {
+        expect(TextUtil.sentenceToCamelCase('This is a test')).toEqual('thisIsATest');
+        expect(TextUtil.sentenceToCamelCase('This is a test', true)).toEqual('ThisIsATest');
+        expect(TextUtil.sentenceToCamelCase('This is a test!. Yes')).toEqual('thisIsATestYes');
+    });
+
+    it('camelCaseToSentence', () => {
+        expect(TextUtil.camelCaseToSentence('thisIsATest')).toEqual('This is a test');
+    });
+
     describe('isLowerCase', () => {
         it('Text with uppercase in it is not lowercase', () => {
             expect(TextUtil.isLowerCase('Hello')).toBeFalsy();
         });
 
-        it('Text with lowercase is lowercase', () => {
+        it('Text in lowercase is lowercase', () => {
             expect(TextUtil.isLowerCase('hello')).toBeTruthy();
+        });
+    });
+
+    describe('isUpperCase', () => {
+        it('Text with lowercase in it is not uppercase', () => {
+            expect(TextUtil.isUpperCase('Hello')).toBeFalsy();
+            expect(TextUtil.isUpperCase('hello')).toBeFalsy();
+        });
+
+        it('Text in uppercase is uppercase', () => {
+            expect(TextUtil.isUpperCase('HELLO')).toBeTruthy();
         });
     });
 
     describe('csvToObjects', () => {
         it('can generate object from csv', () => {
-            const csv = `name;age;location
-                Orochimaru;900;Somewhere
-                King Kong;34;India
-                Ubuhuru Kakadu;122;No idea`;
+            const csv = 'Name;Age;Location;Is Human\n' +
+                'Orochimaru;900;Somewhere;true\n\r' +
+                'King Kong;34;India;false\n\r' +
+                'Ubuhuru Kakadu;122;No idea;true\n\r';
             const list = TextUtil.csvToObjects<any>(csv, ';');
+            console.log('csv result', list);
+
             expect(list.length).toBe(3);
             expect(list[1].age).toBe(34);
+            expect(list[1].isHuman).toBe(false);
         });
     });
 });

@@ -1,5 +1,6 @@
 import {Match} from '../models/match.model';
 import {EmptyUtil} from './empty.util';
+import {CSVOptions} from '../models/csv-options.model';
 
 export class TextUtil {
     /**
@@ -95,35 +96,134 @@ export class TextUtil {
         }
     }
 
+
     /**
-     * Checks if a string is upper or lowercase.
+     * Converting sentences with spaces into camelCase sentenes
+     * @param sentence The sentence to be converted.
+     * @param upperCase? If it is UpperCamelCase or not
+     */
+    public static sentenceToCamelCase(sentence: string, upperCase?: boolean): string {
+        const list = sentence.split(' ');
+        let camelCase = '';
+        list.forEach((word: string, index: number) => {
+            word = word.replace(/[^\w ]+/g, '');
+
+            if (index === 0 && !upperCase) {
+                camelCase += word.toLowerCase();
+            } else {
+                camelCase += word.slice(0, 1).toUpperCase() +
+                    word.slice(1, word.length);
+            }
+        });
+        return camelCase;
+    }
+
+    /**
+     * Converts a camelCase sentence to a sentence with spaces.
+     * @param sentence The sentence to be converted.
+     */
+    public static camelCaseToSentence(sentence: string): string {
+        sentence = sentence
+            .replace(/([a-z])([A-Z])/g, '$1 $2')
+            .replace(/\b([A-Z]+)([A-Z])([a-z])/, '$1 $2$3');
+
+        sentence = sentence.split(' ')
+            .map(this.handleWordForCamelCaseToSentence)
+            .join(' ');
+        return sentence;
+    }
+
+    private static handleWordForCamelCaseToSentence(word: string, index: number) {
+        word = word.toLowerCase();
+        if (index === 0) {
+            word = word.slice(0, 1).toUpperCase() +
+                word.slice(1, word.length);
+        }
+        return word;
+    }
+
+    /**
+     * Checks if a string is all lowercase.
      */
     public static isLowerCase(text: string): boolean {
         return text === text.toLowerCase() && text !== text.toUpperCase();
     }
 
-    public static csvToObjects<T>(input: string, delimiter: string, options?: {headerNames: string[]}): T[] {
+    /**
+     * Checks if a string is all uppercase.
+     */
+    public static isUpperCase(text: string): boolean {
+        return text === text.toUpperCase() && text !== text.toLowerCase();
+    }
+
+    /**
+     *
+     * @param input The input string
+     * @param delimiter whatever character the columns are separated by
+     * @param options The options are optional, and needs to be in the same order as the columns are.
+     */
+    public static csvToObjects<T>(input: string, delimiter: string = ',', options: CSVOptions = new CSVOptions()): T[] {
         const result: T[] = [],
-            rows = input.split(/\n/g);
-        
-        rows.forEach((row: string, index: number) => {
-            if (index === 0 && !options || !options.headerNames) {
-                options = {headerNames: []};
-                options.headerNames = row.split(delimiter);
-            } else {
-                result.push(this.handleCSVRow<T>(row, delimiter, options.headerNames));
-            }
-        });
+            rows = input.split(/[\n\r]/g);
+
+        rows.forEach((row: string, index: number) =>
+            this.handleCSVRow(row, index, options, delimiter, result));
         return result;
     }
 
-    private static handleCSVRow<T>(row: string, delimiter: string, headerNames: string[]): T {
+    private static handleCSVRow<T>(row: string, index: number, options: CSVOptions, delimiter: string, result: T[]) {
+        if (row !== '') {
+            if (index === 0 && (!options.headerNames || !options.headerNames.length)) {
+                this.handleHeaderRow(row, delimiter, options);
+            } else {
+                result.push(this.handleCSVRowColumns<T>(row, delimiter, options));
+            }
+        }
+    }
+
+    private static handleHeaderRow(row: string, delimiter: string, options: CSVOptions): void {
+        options.headerNames = row.split(delimiter)
+            .map(text => this.sentenceToCamelCase(text));
+    }
+
+    private static handleCSVRowColumns<T>(row: string, delimiter: string, options: CSVOptions): T {
         const obj = {};
-        // TODO: Determine the datatype
+        const doSetTypes = !options || !options.types || !options.types.length;
+
+        if (doSetTypes && !options) {
+            options = new CSVOptions();
+        } else if (doSetTypes) {
+            options.types = [];
+        }
+
         row.split(delimiter)
             .forEach((column: any, index: number) => {
-                obj[headerNames[index]] = column;
+                if (doSetTypes) {
+                    this.getColumnType(column, options.types);
+                }
+                obj[options.headerNames[index]] = this.getCSVColumnWithCorrectType(column, options.types[index]);
             });
         return obj as T;
+    }
+
+    private static getColumnType(column: any, types: string[]): void {
+        if (!isNaN(column)) {
+            types.push('number');
+        } else if (column === 'true' || column === 'false') {
+            types.push('boolean');
+        } else {
+            types.push('string');
+        }
+    }
+
+    private static getCSVColumnWithCorrectType(column: any, type: string): any {
+        switch (type) {
+            case 'number':
+                return +column;
+            case 'boolean':
+                return column === 'true' || column === 1 || column.toLowerCase() === 'yes';
+            default:
+                return column;
+        }
     }
 }

@@ -27,11 +27,15 @@ Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/
 ## TextUtil
 * `isEmpty(string)` - Checks if a string is null, undefined or has a length of 0.
 * `getMatchingParts(string, stringToFind)` - 
-Returns a Match object. The Match object for `getMatchingParts('Chicken', 'ck')` 
-looks like this `{start: 'Chi', match: 'ck', end: 'en'}`.
+    Returns a Match object. The Match object for `getMatchingParts('Chicken', 'ck')` 
+    looks like this `{start: 'Chi', match: 'ck', end: 'en'}`.
 * `getIndexOf(sourceString, targetString)` - Is basically `sourceString.toLowerCase().indexOf(targetString.toLowerCase)`
 * `contains(sourceString, targetString)` - Checks if a string exists within another. This is case-insensitive.
 * `isLowerCase(string)` - Checks if a string is upper or lowercase.
+* `sentenceToCamelCase(sentence, upperCase?)` - Converts a sentence into lower camel case.
+* `camelCaseToSentence(sentence)` - Converts a sentence of camelCase words into a sentence with spaces.
+* `csvToObjects(input, delimiter?, options?: {headerNames?: string[], types?: string[]})` - 
+    Generates an array of objects from a CSV string.
 
 ## EmptyUtil
 * `isNullOrUndefined(value, value?)` - Checks if all the input is null or undefined.
