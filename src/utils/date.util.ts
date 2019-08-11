@@ -1,8 +1,8 @@
 import {TimeSince} from '../models/time-since.model';
 
 export class DateUtil {
-    /*
-    private static getDifference(from: Date | number, to: Date | number) {
+    /* istanbul ignore next */
+    private static getDifference(from: Date | number, to: Date | number): TimeSince {
         let msSince = DateUtil.getDifferenceInMS(from, to);
 
         const minuteInMS = 60000;
@@ -33,7 +33,6 @@ export class DateUtil {
             seconds,
             ms);
     }
-     */
 
     /**
      * Returns the difference between two dates in milliseconds

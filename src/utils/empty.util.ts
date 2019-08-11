@@ -6,8 +6,8 @@ export class EmptyUtil {
      * Checks if all the input is null or undefined. 
      */
     public static isNullOrUndefined(value: any, value2?: any): boolean {
-        return (!value && isNaN(value)) || value === null &&
-            (!value && isNaN(value2)) || value2 === null;
+        return (value === undefined && isNaN(value)) || value === null &&
+            (value2 === undefined && isNaN(value2)) || value2 === null;
     }
 
     /**
