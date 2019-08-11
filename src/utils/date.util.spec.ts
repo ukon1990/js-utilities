@@ -1,7 +1,8 @@
 import {DateUtil} from './date.util';
 import {TimeSince} from '../models/time-since.model';
 
-describe('DateUtil', () => {/*
+describe('DateUtil', () => {
+    /*
     describe('getDifference', () => {
         it('can get time from a year ago or so', () => {
             expect(DateUtil.getDifference(
@@ -9,7 +10,7 @@ describe('DateUtil', () => {/*
                 new Date('July 4 2018 10:34:35')))
                 .toEqual(
                     new TimeSince(
-                        60,
+                        60, // Weeks
                         6,
                         1,
                         10,
