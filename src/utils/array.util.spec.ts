@@ -163,4 +163,15 @@ describe('ArrayUtil', () => {
             expect(array[2]).toBe('f');
        });
     });
+
+    it('randomOrder', () => {
+        const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const list1 = ArrayUtil.randomOrder(list);
+        const list2 = ArrayUtil.randomOrder(list);
+
+        expect(list1.length).toBe(list.length);
+        expect(list2.length).toBe(list.length);
+        expect(
+            ArrayUtil.isEqual(list1, list2)).toBeFalsy();
+    });
 });

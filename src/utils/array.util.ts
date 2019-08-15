@@ -132,4 +132,19 @@ export class ArrayUtil {
         .forEach(i =>
             fromArray.splice(i, 1));
     }
+
+    /**
+     * Returns an array with the items in the provided array in random order.
+     * @param array The array
+     */
+    public static randomOrder(array: any[]): any[] {
+        const random = [];
+        const tmp = [...array];
+        for(let i = 0, length = array.length; i < length; i++) {
+            const index = Math.round(Math.random() * tmp.length);
+            random.push(tmp[index]);
+            ArrayUtil.removeIndexes([index], tmp);
+        }
+        return random;
+    }
 }
