@@ -83,7 +83,6 @@ export class ArrayUtil {
                 map[id] = true;
             }
         });
-        console.log('Map', map, removeIndexes)
 
         ArrayUtil.removeIndexes(removeIndexes, fromArray);
     }
