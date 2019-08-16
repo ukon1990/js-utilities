@@ -140,7 +140,12 @@ export class ArrayUtil {
         const random = [];
         const tmp = [...array];
         for(let i = 0, length = array.length; i < length; i++) {
-            const index = Math.round(Math.random() * tmp.length);
+            let index = Math.round(Math.random() * tmp.length - 1);
+
+            if (index < 0) {
+                index = 0;
+            }
+
             random.push(tmp[index]);
             ArrayUtil.removeIndexes([index], tmp);
         }

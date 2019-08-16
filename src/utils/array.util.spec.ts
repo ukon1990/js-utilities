@@ -164,8 +164,10 @@ describe('ArrayUtil', () => {
        });
     });
 
-    it('randomOrder', () => {
-        const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    describe('randomOrder', () => {
+        it('the list has the same length and unequal', () => {
+
+        const list = [...Array(100).keys()];
         const list1 = ArrayUtil.randomOrder(list);
         const list2 = ArrayUtil.randomOrder(list);
 
@@ -173,5 +175,19 @@ describe('ArrayUtil', () => {
         expect(list2.length).toBe(list.length);
         expect(
             ArrayUtil.isEqual(list1, list2)).toBeFalsy();
+        });
+        
+        it('does not contain undefined values', () => {
+            const list = [...Array(10000).keys()];
+            expect(
+                ArrayUtil.randomOrder(list)
+                .filter(n => n === undefined).length)
+                .toBe(0);
+            expect(
+                ArrayUtil.randomOrder(list)
+                .filter(n => n === undefined).length)
+                .toBe(0);
+        });
+
     });
 });
