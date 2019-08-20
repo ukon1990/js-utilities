@@ -163,4 +163,31 @@ describe('ArrayUtil', () => {
             expect(array[2]).toBe('f');
        });
     });
+
+    describe('randomOrder', () => {
+        it('the list has the same length and unequal', () => {
+
+        const list = [...Array(100).keys()];
+        const list1 = ArrayUtil.randomOrder(list);
+        const list2 = ArrayUtil.randomOrder(list);
+
+        expect(list1.length).toBe(list.length);
+        expect(list2.length).toBe(list.length);
+        expect(
+            ArrayUtil.isEqual(list1, list2)).toBeFalsy();
+        });
+        
+        it('does not contain undefined values', () => {
+            const list = [...Array(10000).keys()];
+            expect(
+                ArrayUtil.randomOrder(list)
+                .filter(n => n === undefined).length)
+                .toBe(0);
+            expect(
+                ArrayUtil.randomOrder(list)
+                .filter(n => n === undefined).length)
+                .toBe(0);
+        });
+
+    });
 });

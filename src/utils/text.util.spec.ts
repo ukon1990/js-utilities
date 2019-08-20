@@ -140,7 +140,6 @@ describe('TextUtil', () => {
                 'King Kong;34;India;false\n\r' +
                 'Ubuhuru Kakadu;122;No idea;true\n\r';
             const list = TextUtil.csvToObjects<any>(csv, ';');
-            console.log('csv result', list);
 
             expect(list.length).toBe(3);
             expect(list[1].age).toBe(34);

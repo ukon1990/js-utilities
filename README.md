@@ -23,6 +23,7 @@ Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/
 * `removeObjects(values, fromArray)` - Removes multiple objects/values from an array.
 * `removeIndexes(indexes, fromArray)` - Removes the elements from an array at the supplied index locations
 * `removeDuplicates(fromArray)` - Remove all duplicate entries in an array.
+* `randomOrder(fromArray)` - Returns an array with the items in the fromArray in random order.
 
 ## TextUtil
 * `isEmpty(string)` - Checks if a string is null, undefined or has a length of 0.

@@ -83,7 +83,6 @@ export class ArrayUtil {
                 map[id] = true;
             }
         });
-        console.log('Map', map, removeIndexes)
 
         ArrayUtil.removeIndexes(removeIndexes, fromArray);
     }
@@ -131,5 +130,25 @@ export class ArrayUtil {
             (a, b) => b - a)
         .forEach(i =>
             fromArray.splice(i, 1));
+    }
+
+    /**
+     * Returns an array with the items in the provided array in random order.
+     * @param array The array
+     */
+    public static randomOrder(array: any[]): any[] {
+        const random = [];
+        const tmp = [...array];
+        for(let i = 0, length = array.length; i < length; i++) {
+            let index = Math.round(Math.random() * tmp.length - 1);
+
+            if (index < 0) {
+                index = 0;
+            }
+
+            random.push(tmp[index]);
+            ArrayUtil.removeIndexes([index], tmp);
+        }
+        return random;
     }
 }
