@@ -19,11 +19,11 @@ Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/
 * `clone(array)` - Returns a cloned version of an array. Removing all child object references.
 * `isEqual(array1, array2)` - Checks if two arrays are equal regardless of object reference.
 * `getDifference(array1, array2)` - Returns an array of differences as `Difference` objects.
-* `removeObject(value, fromArray)` - Removes all entries that is identical to a value from an array, regardless of the object reference.
+* `removeObject(value, fromArray, immutable = false)` - Removes all entries that is identical to a value from an array, regardless of the object reference. If , immutable = true, it will return a copy instead of mutating the input array.
 * `removeObjects(values, fromArray)` - Removes multiple objects/values from an array.
 * `removeIndexes(indexes, fromArray)` - Removes the elements from an array at the supplied index locations
-* `removeDuplicates(fromArray)` - Remove all duplicate entries in an array.
-* `randomOrder(fromArray)` - Returns an array with the items in the fromArray in random order.
+* `removeDuplicates(fromArray, immutable = false)` - Remove all duplicate entries in an array. If , immutable = true, it will return a copy instead of mutating the input array.
+* `randomOrder(fromArray)` - Returns a new array with the items in the fromArray in random order.
 
 ## TextUtil
 * `isEmpty(string)` - Checks if a string is null, undefined or has a length of 0.

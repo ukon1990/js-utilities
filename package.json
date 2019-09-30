@@ -1,14 +1,14 @@
 {
   "name": "@ukon1990/js-utilities",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "A light weight package for object and array manipulation. As well as some utilities for matching text.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "ng test --code-coverage",
+    "test": "jest --forceExit --coverage --verbose",
     "headless-test": "ng test --watch=false --browsers ChromeHeadless --code-coverage",
-    "deploy": "npm run headless-test && tsc && npm publish --access public"
+    "deploy": "npm run test && tsc && npm publish --access public"
   },
   "keywords": [
     "String",
@@ -28,34 +28,14 @@
     "type": "git",
     "url": "https://github.com/ukon1990/js-utilities"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.802.2",
-    "@angular/cli": "~8.2.2",
-    "@angular/compiler": "~8.2.2",
-    "@angular/compiler-cli": "~8.2.2",
-    "@angular/core": "~8.2.2",
-    "@angular/language-service": "~8.2.2",
-    "@types/jasmine": "~3.4.0",
-    "@types/jasminewd2": "~2.0.6",
-    "@types/node": "~12.7.2",
-    "codelyzer": "^5.1.0",
-    "jasmine-core": "~3.4.0",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "^4.2.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "^1.1.2",
-    "karma-coverage-istanbul-reporter": "~2.1.0",
-    "karma-jasmine": "~2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.2",
-    "karma-typescript": "^4.1.1",
-    "protractor": "~5.4.2",
-    "rxjs": "~6.5.2",
-    "ts-loader": "^6.0.4",
-    "ts-node": "~8.3.0",
-    "tslint": "~5.18.0",
-    "typescript": "3.5.3",
-    "webpack": "^4.39.2",
-    "zone.js": "^0.10.2"
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.8",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "ts-loader": "^6.2.0",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
   }
 }
