@@ -94,7 +94,7 @@ describe('ObjectUtil', () => {
             obj2.circular = obj2;
             expect(ObjectUtil.getDifference(obj1, obj2).length).toBeTruthy();
             expect(ObjectUtil.isEqual(obj1, obj2)).toBeFalsy();
-            expect(ObjectUtil.getDifference(document, document).length).toBeFalsy();
+            expect(ObjectUtil.getDifference(obj2, obj2).length).toBeFalsy();
         });
     });
 });
