@@ -1,14 +1,15 @@
 {
   "name": "@ukon1990/js-utilities",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "description": "A light weight package for object and array manipulation. As well as some utilities for matching text.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest --forceExit --coverage --verbose",
-    "headless-test": "ng test --watch=false --browsers ChromeHeadless --code-coverage",
-    "deploy": "npm run test && tsc && npm publish --access public"
+    "watch": "npm test -- --watch",
+    "deploy": "npm run test && tsc && npm publish --access public",
+    "lint": "tslint ./src/"
   },
   "keywords": [
     "String",
