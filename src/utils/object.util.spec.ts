@@ -4,26 +4,26 @@ describe('ObjectUtil', () => {
 
     describe('isObject', () => {
         it('Populated objects returns true', () => {
-            expect(ObjectUtil.isObject({name: 'true'})).toBeTruthy();
+            expect(ObjectUtil.isObject({name: 'true'})).toBe(true);
         });
 
         it('Empty objects are objects too', () => {
-            expect(ObjectUtil.isObject({})).toBeTruthy();
+            expect(ObjectUtil.isObject({})).toBe(true);
         });
 
         it('Arrays are not objects', () => {
-            expect(ObjectUtil.isObject([])).toBeFalsy();
-            expect(ObjectUtil.isObject(['Tore', 'Tang', 'en', 'gammal', 'mann'])).toBeFalsy();
+            expect(ObjectUtil.isObject([])).toBe(false);
+            expect(ObjectUtil.isObject(['Tore', 'Tang', 'en', 'gammal', 'mann'])).toBe(false);
         });
     });
 
     describe('isPopulatedObject', () => {
         it('Populated objects returns true', () => {
-            expect(ObjectUtil.isPopulatedObject({name: 'true'})).toBeTruthy();
+            expect(ObjectUtil.isPopulatedObject({name: 'true'})).toBe(true);
         });
 
         it('Empty objects are false', () => {
-            expect(ObjectUtil.isPopulatedObject({})).toBeFalsy();
+            expect(ObjectUtil.isPopulatedObject({})).toBe(false);
         });
     });
 
@@ -77,7 +77,7 @@ describe('ObjectUtil', () => {
             const obj1 = {name: 'Hi', list: ['A', 'B', 'C'], easyAs: {oneTwoThree: 'Do re mi'}};
             const obj2 = {name: 'Hi', list: ['A', 'B', 'C'], easyAs: {oneTwoThree: 'Do re mi'}};
             expect(ObjectUtil.getDifference(obj1, obj2).length).toBeFalsy();
-            expect(ObjectUtil.isEqual(obj1, obj2)).toBeTruthy();
+            expect(ObjectUtil.isEqual(obj1, obj2)).toBe(true);
         });
 
         it('Non identical objects are not equal', () => {

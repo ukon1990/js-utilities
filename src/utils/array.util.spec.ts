@@ -15,11 +15,11 @@ describe('ArrayUtil', () => {
 
   describe('isPopulatedArray', () => {
     it('Empty array is false', () => {
-      expect(ArrayUtil.isPopulatedArray([])).toBeFalsy();
+      expect(ArrayUtil.isPopulatedArray([])).toBe(false);
     });
 
     it('Non-empty array is true', () => {
-      expect(ArrayUtil.isPopulatedArray(['a'])).toBeTruthy();
+      expect(ArrayUtil.isPopulatedArray(['a'])).toBe(true);
     });
   });
 
@@ -52,14 +52,14 @@ describe('ArrayUtil', () => {
   describe('getDifference && isEqual', () => {
     it('Identical arrays', () => {
       expect(ArrayUtil.getDifference(['1', 2], ['1', 2]).length).toBeFalsy();
-      expect(ArrayUtil.isEqual(['1', 2], ['1', 2])).toBeTruthy();
+      expect(ArrayUtil.isEqual(['1', 2], ['1', 2])).toBe(true);
     });
 
     it('Non-identical arrays ar not equal', () => {
       expect(
         ArrayUtil.getDifference(['1', 2, 3], ['1', 2]).length
       ).toBeTruthy();
-      expect(ArrayUtil.isEqual(['1', 2, 3], ['1', 2])).toBeFalsy();
+      expect(ArrayUtil.isEqual(['1', 2, 3], ['1', 2])).toBe(false);
     });
   });
 
