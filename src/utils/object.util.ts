@@ -97,7 +97,7 @@ export class ObjectUtil {
     public static getDifference(object1: object | any, object2: object | any,
                                 ignoreFields?: any, onlyFields?: string[]): Array<Difference> {
         const differences = new Array<Difference>(),
-            onlyFieldsMap = new Map<string, boolean>();
+        onlyFieldsMap = new Map<string, boolean>();
 
         ignoreFields = this.getIgnoreFields(ignoreFields, onlyFields, onlyFieldsMap);
 

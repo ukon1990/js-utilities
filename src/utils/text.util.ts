@@ -1,13 +1,13 @@
-import { Match } from "../models/match.model";
-import { EmptyUtil } from "./empty.util";
-import { CSVOptions } from "../models/csv-options.model";
+import { Match } from '../models/match.model';
+import { EmptyUtil } from './empty.util';
+import { CSVOptions } from '../models/csv-options.model';
 
 export class TextUtil {
   static toSlug(text: string): any {
     return text
       .toLowerCase()
-      .replace(/[ ]{1,9999}/g, "-")
-      .replace(/[^a-zA-Z0-9-]{1,9999}/g, "");
+      .replace(/[ ]{1,9999}/g, '-')
+      .replace(/[^a-zA-Z0-9-]{1,9999}/g, '');
   }
   /**
    * Checks if a string is null, undefined or has a length of 0.
@@ -81,7 +81,7 @@ export class TextUtil {
    * @param matchingString The 'query' string
    */
   public static getMatchingParts(text: string, matchingString: string): Match {
-    const match = new Match("", "", "");
+    const match = new Match('', '', '');
     let firstIndex = 0;
 
     if (EmptyUtil.isNullOrUndefined(text)) {
@@ -89,7 +89,7 @@ export class TextUtil {
     }
 
     if (EmptyUtil.isNullOrUndefined(matchingString)) {
-      matchingString = "";
+      matchingString = '';
     }
 
     firstIndex = TextUtil.setFirstMatchPartAndIndex(
@@ -144,10 +144,10 @@ export class TextUtil {
     sentence: string,
     upperCase?: boolean
   ): string {
-    const list = sentence.split(" ");
-    let camelCase = "";
+    const list = sentence.split(' ');
+    let camelCase = '';
     list.forEach((word: string, index: number) => {
-      word = word.replace(/[^\w ]+/g, "");
+      word = word.replace(/[^\w ]+/g, '');
 
       if (index === 0 && !upperCase) {
         camelCase += word.toLowerCase();
@@ -165,13 +165,13 @@ export class TextUtil {
    */
   public static camelCaseToSentence(sentence: string): string {
     sentence = sentence
-      .replace(/([a-z])([A-Z])/g, "$1 $2")
-      .replace(/\b([A-Z]+)([A-Z])([a-z])/, "$1 $2$3");
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/\b([A-Z]+)([A-Z])([a-z])/, '$1 $2$3');
 
     sentence = sentence
-      .split(" ")
+      .split(' ')
       .map(this.handleWordForCamelCaseToSentence)
-      .join(" ");
+      .join(' ');
     return sentence;
   }
 
@@ -206,10 +206,10 @@ export class TextUtil {
    */
   public static objectsToCSV(
     list: any[],
-    delimiter: string = ",",
+    delimiter: string = ',',
     useKeys?: string[]
   ): string {
-    let body = "";
+    let body = '';
     const keyMap = {};
 
     if (useKeys) {
@@ -242,12 +242,12 @@ export class TextUtil {
     if (!useKeys) {
       Object.keys(obj).forEach(key => (keyMap[key] = true));
     }
-    let row = "";
+    let row = '';
     row += Object.keys(keyMap)
       .map((key: string) => obj[key])
       .join(delimiter);
 
-    body += row + "\n\r";
+    body += row + '\n\r';
     return body;
   }
 
@@ -259,7 +259,7 @@ export class TextUtil {
    */
   public static csvToObjects<T>(
     input: string,
-    delimiter: string = ",",
+    delimiter: string = ',',
     options: CSVOptions = new CSVOptions()
   ): T[] {
     const result: T[] = [],
@@ -278,7 +278,7 @@ export class TextUtil {
     delimiter: string,
     result: T[]
   ) {
-    if (row !== "") {
+    if (row !== '') {
       if (
         index === 0 &&
         (!options.headerNames || !options.headerNames.length)
@@ -328,21 +328,21 @@ export class TextUtil {
 
   private static getColumnType(column: any, types: string[]): void {
     if (!isNaN(column)) {
-      types.push("number");
-    } else if (column === "true" || column === "false") {
-      types.push("boolean");
+      types.push('number');
+    } else if (column === 'true' || column === 'false') {
+      types.push('boolean');
     } else {
-      types.push("string");
+      types.push('string');
     }
   }
 
   private static getCSVColumnWithCorrectType(column: any, type: string): any {
     switch (type) {
-      case "number":
+      case 'number':
         return +column;
-      case "boolean":
+      case 'boolean':
         return (
-          column === "true" || column === 1 || column.toLowerCase() === "yes"
+          column === 'true' || column === 1 || column.toLowerCase() === 'yes'
         );
       default:
         return column;

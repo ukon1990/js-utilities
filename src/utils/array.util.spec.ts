@@ -1,7 +1,7 @@
 import { ArrayUtil } from './array.util';
 
 describe('ArrayUtil', () => {
-  describe("isArray", () => {
+  describe('isArray', () => {
     it('can detect arrays', () => {
       expect(ArrayUtil.isArray([])).toBe(true);
       expect(ArrayUtil.isArray(['Bubblegum'])).toBe(true);

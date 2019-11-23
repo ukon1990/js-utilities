@@ -3,7 +3,7 @@ import {ObjectUtil} from './object.util';
 
 export class EmptyUtil {
     /**
-     * Checks if all the input is null or undefined. 
+     * Checks if all the input is null or undefined.
      */
     public static isNullOrUndefined(value: any, value2?: any): boolean {
         return (value === undefined && isNaN(value)) || value === null &&
