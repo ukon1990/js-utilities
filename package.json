@@ -8,7 +8,7 @@
     "build": "tsc",
     "test": "jest --forceExit --coverage --verbose",
     "watch": "npm test -- --watch",
-    "deploy": "npm run test && tsc && npm publish --access public",
+    "deploy": "npm run lint && npm run test && tsc && npm publish --access public",
     "lint": "tslint --project tsconfig.json"
   },
   "keywords": [
