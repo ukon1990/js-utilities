@@ -1,7 +1,7 @@
-import { EmptyUtil } from './empty.util';
-import { ObjectUtil } from './object.util';
-import { Difference } from '../models/difference.model';
-import { CompareUtil } from './compare.util';
+import { EmptyUtil } from "./empty.util";
+import { ObjectUtil } from "./object.util";
+import { Difference } from "../models/difference.model";
+import { CompareUtil } from "./compare.util";
 
 export class ArrayUtil {
   /**
@@ -10,9 +10,9 @@ export class ArrayUtil {
   public static isArray(value: any): boolean {
     return (
       !EmptyUtil.isNullOrUndefined(value) &&
-      typeof value === 'object' &&
-      value.forEach &&
-      value.push
+      typeof value === "object" &&
+      value.forEach !== undefined &&
+      value.push !== undefined
     );
   }
 
@@ -28,7 +28,7 @@ export class ArrayUtil {
    */
   public static clone(array: Array<any>): Array<any> {
     if (EmptyUtil.isNullOrUndefined(array)) {
-      console.error('Could not clone an array because it is null or undefined');
+      console.error("Could not clone an array because it is null or undefined");
       return array;
     }
 
@@ -69,7 +69,7 @@ export class ArrayUtil {
       EmptyUtil.isNullOrUndefined(array1) ||
       EmptyUtil.isNullOrUndefined(array2)
     ) {
-      differences.push(new Difference('array', array1, array2));
+      differences.push(new Difference("array", array1, array2));
     } else {
       array1.forEach((n, i) =>
         CompareUtil.setDifferences(i, array1[i], array2[i], differences)
