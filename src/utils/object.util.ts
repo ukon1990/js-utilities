@@ -27,7 +27,7 @@ export class ObjectUtil {
      * @param from Object to copy values from
      * @param to Object to overwrite existing values from
      */
-    public static overwrite(from: object | any, to: object | any, doNotMutate: boolean = false): void {
+    public static overwrite(from: object | any, to: object | any, doNotMutate: boolean = false): object {
         if (doNotMutate) {
             to = this.clone(to);
         }

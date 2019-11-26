@@ -1,6 +1,6 @@
 {
   "name": "@ukon1990/js-utilities",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "A light weight package for object and array manipulation. As well as some utilities for matching text.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

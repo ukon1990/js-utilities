@@ -40,6 +40,17 @@ describe('ObjectUtil', () => {
             expect(obj.child === obj2.child).toBeFalsy();
         });
 
+        it('Does not mutate if true', () => {
+            const obj = {name: 'Teigen', child: [{name: 'Urge'}]};
+            const obj2 = {name: 'Trond', child: [{name: 'Purge'}]};
+            const mutated = ObjectUtil.overwrite(obj2, obj, false);
+            const nonMutated = ObjectUtil.overwrite(obj2, obj, true);
+
+            expect(mutated === obj).toBe(true);
+            expect(nonMutated === obj).toBe(false);
+            expect(nonMutated).toEqual(obj);
+        });
+
         it('Can overwrite nested objects', () => {
             const obj = {name: 'test', child: {age: 99, child: {engine: 'unity'}}};
             const obj2 = {name: 'test2', child: {age: 100, child: {engine: 'unreal'}}};
