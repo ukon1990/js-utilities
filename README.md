@@ -27,6 +27,7 @@ Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/
 
 ## TextUtil
 * `isEmpty(string)` - Checks if a string is null, undefined or has a length of 0.
+* `isEqualIgnoreCase(string, string` - Checks if two strings are equal (case insensitive).
 * `getMatchingParts(string, stringToFind)` - 
     Returns a Match object. The Match object for `getMatchingParts('Chicken', 'ck')` 
     looks like this `{start: 'Chi', match: 'ck', end: 'en'}`.

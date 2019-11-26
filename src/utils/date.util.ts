@@ -83,7 +83,7 @@ export class DateUtil {
      */
     public static timeSince(date: Date | number, timeUnit: string = 'ms'): number {
         const now = new Date();
-        switch(timeUnit) {
+        switch (timeUnit) {
             case 'w':
             case 'weeks':
                 return DateUtil.getDifferenceInWeeks(date, now);

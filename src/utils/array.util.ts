@@ -11,8 +11,8 @@ export class ArrayUtil {
     return (
       !EmptyUtil.isNullOrUndefined(value) &&
       typeof value === 'object' &&
-      value.forEach &&
-      value.push
+      value.forEach !== undefined &&
+      value.push !== undefined
     );
   }
 
