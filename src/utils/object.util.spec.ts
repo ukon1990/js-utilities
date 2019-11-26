@@ -40,6 +40,17 @@ describe('ObjectUtil', () => {
             expect(obj.child === obj2.child).toBeFalsy();
         });
 
+        it('Can overwrite nested objects', () => {
+            const obj = {name: 'test', child: {age: 99, child: {engine: 'unity'}}};
+            const obj2 = {name: 'test2', child: {age: 100, child: {engine: 'unreal'}}};
+
+            ObjectUtil.overwrite(obj, obj2);
+
+            expect(obj2.name).toBe(obj.name);
+            expect(obj2.child.age).toBe(obj.child.age);
+            expect(obj2.child.child.engine).toBe(obj.child.child.engine);
+        });
+
         it('Can overwrite one object with another', () => {
             const obj = {name: 'Teigen'};
             const obj2 = {name: undefined};

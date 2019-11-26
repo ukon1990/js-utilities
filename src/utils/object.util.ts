@@ -27,7 +27,11 @@ export class ObjectUtil {
      * @param from Object to copy values from
      * @param to Object to overwrite existing values from
      */
-    public static overwrite(from: object | any, to: object | any): void {
+    public static overwrite(from: object | any, to: object | any, doNotMutate: boolean = false): void {
+        if (doNotMutate) {
+            to = this.clone(to);
+        }
+
         if (EmptyUtil.isNullOrUndefined(from)) {
             console.error('Could not overwrite an object because the source is null or undefined');
             return;
@@ -36,6 +40,7 @@ export class ObjectUtil {
         Object.keys(from).forEach(key => {
             ObjectUtil.overwriteField(from, key, to);
         });
+        return to;
     }
 
     private static overwriteField(from: object | any, key: string, to: object | any) {
@@ -47,6 +52,7 @@ export class ObjectUtil {
             try {
                 to[key] = from[key];
             } catch (e) {
+                to[key] = null;
             }
         }
     }

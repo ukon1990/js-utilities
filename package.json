@@ -1,13 +1,13 @@
 {
   "name": "@ukon1990/js-utilities",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "A light weight package for object and array manipulation. As well as some utilities for matching text.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "jest --forceExit --coverage --verbose",
-    "watch": "npm test -- --watch",
+    "watch": "npm test -- --watch --coverage=false",
     "deploy": "npm run lint && npm run test && tsc && npm publish --access public",
     "lint": "tslint --project tsconfig.json"
   },
