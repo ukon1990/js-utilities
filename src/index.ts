@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export {ArrayUtil} from './utils/array.util';
 export {ObjectUtil} from './utils/object.util';
 export {DateUtil} from './utils/date.util';
