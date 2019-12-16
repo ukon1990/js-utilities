@@ -12,6 +12,8 @@ Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/
 * `clone(object)` - Returns a cloned version of an object. Removing all child object references.
 * `isEqual(object1, object2)` - Checks if two objects are equal regardless of object reference.
 * `getDifference(object1, object2)` - Returns an array of object differences as `Difference` objects.
+* `merge(object1, object2` - Merges/Combines two objects into one, keeping all the
+    values from each that does not exist in the other.
 
 ## ArrayUtil
 * `isArray(value)` - Checks if a value is an object and not array

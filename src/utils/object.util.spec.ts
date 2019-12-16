@@ -27,7 +27,7 @@ describe('ObjectUtil', () => {
         });
     });
 
-    describe('overwrite', () => {
+    describe('overwrite && merge', () => {
         it('Can overwrite one object with another', () => {
             const obj = {name: 'Teigen', child: [{name: 'Urge'}]};
             const obj2 = {name: 'Trond', child: [{name: 'Purge'}]};
@@ -76,6 +76,28 @@ describe('ObjectUtil', () => {
 
             ObjectUtil.overwrite(undefined, obj);
             expect(obj).toEqual(obj);
+        });
+
+        it('Can merge and keep both values', () => {
+            const from = {
+                name: 'Åge',
+                age: 99,
+                profession: 'Snake tamer',
+                childFrom: {val: 9}
+            };
+            const to = {
+                profession: 'Carpenter',
+                favoriteDrink: 'Water',
+                childTo: {value: 1}
+            };
+
+            const result = ObjectUtil.merge(from, to) as any;
+            expect(result.name).toBe(from.name);
+            expect(result.age).toBe(from.age);
+            expect(result.profession).toBe(from.profession);
+            expect(result.favoriteDrink).toBe(to.favoriteDrink);
+            expect(result.childTo.value).toBe(to.childTo.value);
+            expect(result.childFrom.val).toBe(from.childFrom.val);
         });
     });
 
