@@ -1,5 +1,5 @@
 import {ObjectUtil} from './object.util';
-import {Difference} from "..";
+import {Difference} from '..';
 
 describe('ObjectUtil', () => {
 
