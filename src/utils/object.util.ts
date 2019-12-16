@@ -80,7 +80,6 @@ export class ObjectUtil {
 
     private static overwriteField(from: object | any, key: string, to: object | any, merge: boolean = false) {
         if (ArrayUtil.isArray(from[key]) && to) {
-            console.log('overwriteField array', key, from, to);
             to[key] = ObjectUtil.clone(from[key]);
         } else if (ObjectUtil.isObject(from[key]) && to) {
             to[key] = merge ?
@@ -90,7 +89,7 @@ export class ObjectUtil {
             try {
                 if (merge) {
                     to[key] = from[key] || to[key];
-                } else  {
+                } else {
                     to[key] = from[key];
                 }
             } catch (e) {
@@ -143,8 +142,9 @@ export class ObjectUtil {
      * @param onlyFields The fields you wish to be considered: e.g ['name', 'age']
      */
     public static getDifference(object1: object | any, object2: object | any,
-                                ignoreFields?: any, onlyFields?: string[]): Array<Difference> {
-        const differences = new Array<Difference>(),
+                                ignoreFields?: any, onlyFields?: string[],
+                                checkForCyclicDependencies?: boolean, parentStackMap?: any[]): Difference[] {
+        const differences: Difference[] = [],
             onlyFieldsMap = new Map<string, boolean>();
 
         ignoreFields = this.getIgnoreFields(ignoreFields, onlyFields, onlyFieldsMap);
@@ -152,20 +152,24 @@ export class ObjectUtil {
         if (EmptyUtil.isNullOrUndefined(object1) || EmptyUtil.isNullOrUndefined(object2)) {
             differences.push(new Difference('array', object1, object2));
         } else {
-            this.processKeys(object1, ignoreFields, onlyFields, onlyFieldsMap, object2, differences);
+            this.processKeys(object1, ignoreFields, onlyFields, onlyFieldsMap, object2, differences,
+                checkForCyclicDependencies, parentStackMap);
         }
         return differences;
     }
 
     private static processKeys(object1: object | any, ignoreFields: any,
-                               onlyFields: string[], onlyFieldsMap: Map<string, boolean>, object2: object | any, differences) {
+                               onlyFields: string[], onlyFieldsMap: Map<string, boolean>,
+                               object2: object | any, differences: Difference[],
+                               checkForCyclicDependencies?: boolean, parentStackMap?: any[]) {
 
         const keyMap = this.getAllKeysFor(object1, object2);
         Object.keys(keyMap).forEach(field => {
             if (ignoreFields && ignoreFields[field]) {
                 return;
             } else if (this.shouldProcessField(onlyFields, onlyFieldsMap, field)) {
-                CompareUtil.setDifferences(field, object1[field], object2[field], differences);
+                CompareUtil.setDifferences(field, object1[field], object2[field], differences,
+                    ignoreFields, onlyFields, checkForCyclicDependencies, parentStackMap);
             }
         });
     }

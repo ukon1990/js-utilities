@@ -1,9 +1,10 @@
 import {ObjectUtil} from './object.util';
-import {Difference} from '../models/difference.model';
+import {Difference} from '..';
 import {ArrayUtil} from './array.util';
 
 export class CompareUtil {
     static setDifferences(key: any, value1: any, value2: any, differences: Array<Difference>,
+                          ignoreFields?: any, onlyFields?: string[],
                           checkForCyclicDependencies = true, parentStackMap?): void {
         if (CompareUtil.isNullAndUndefined(value1, value2)) {
             return;
@@ -11,10 +12,11 @@ export class CompareUtil {
 
         if (CompareUtil.isNullOrUndefined(value1, value2)) {
             this.handleNullOrUndefined(key, value1, value2, differences);
-        } else if (ArrayUtil.isArray(value1)) {
+        } else if (ArrayUtil.isArray(value1) || ArrayUtil.isArray(value2)) {
             this.handleArray(key, value1, value2, differences);
-        } else if (ObjectUtil.isObject(value1)) {
-            this.handleObject(key, value1, value2, differences, checkForCyclicDependencies, parentStackMap);
+        } else if (ObjectUtil.isObject(value1) || ObjectUtil.isObject(value2)) {
+            this.handleObject(key, value1, value2, differences, ignoreFields, onlyFields,
+                checkForCyclicDependencies, parentStackMap);
         } else if (value1 !== value2) {
             differences.push(
                 new Difference(key, value1, value2));
@@ -31,15 +33,25 @@ export class CompareUtil {
     }
 
     private static handleObject(key: any, value1: any, value2: any, differences: Array<Difference>,
+                                ignoreFields: any, onlyFields: string[],
                                 checkForCyclicDependencies: boolean, parentStackMap: any) {
         if (checkForCyclicDependencies) {
             if (!parentStackMap) {
                 parentStackMap = [];
             }
+
+            parentStackMap[key] = parentStackMap[key] ?
+                parentStackMap[key] + 1 : 1;
+
+            if (parentStackMap[key] > 5) {
+                return;
+            }
         }
 
         const childDifference = new Difference(
-            key, value1, value2, ObjectUtil.getDifference(value1, value2, checkForCyclicDependencies, parentStackMap));
+            key, value1, value2, ObjectUtil.getDifference(
+                value1, value2, ignoreFields, onlyFields,
+                checkForCyclicDependencies, parentStackMap));
 
         if (CompareUtil.hasChildren(childDifference)) {
             differences.push(childDifference);

@@ -144,18 +144,20 @@ describe('ObjectUtil', () => {
 
         it('Should be able to detect differences both ways', () => {
             const object1 = {
+                profession: 'Carpenter',
+                favoriteDrink: 'Water',
+                childTo: {value: 1, something: true, equal: true}
+            };
+            const object2 = {
                 name: 'Åge',
                 age: 99,
                 profession: 'Snake tamer',
-                childFrom: {val: 9}
-            };
-            const object2 = {
-                profession: 'Carpenter',
-                favoriteDrink: 'Water',
-                childTo: {value: 1}
+                childFrom: {val: 9},
+                childTo: {something: false, equal: true}
             };
             const diff: Difference[] = ObjectUtil.getDifference(object1, object2);
             expect(diff.length).toBe(6);
+            expect(diff[2].children.length).toBe(2);
         });
     });
 });
