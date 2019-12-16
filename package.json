@@ -21,7 +21,9 @@
     "Difference",
     "Equality",
     "isEmpty",
-    "CSV"
+    "CSV",
+    "Object merge",
+    "Object overwrite"
   ],
   "author": "Jonas Munthe Flønes",
   "license": "ISC",

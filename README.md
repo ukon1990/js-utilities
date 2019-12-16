@@ -8,7 +8,7 @@ Build & Test status: [![CircleCI](https://circleci.com/gh/ukon1990/js-utilities/
 ## ObjectUtil
 * `isObject(value)` - Checks if a value is an object and not array
 * `isPopulatedObject(value)` - Returns true if an object is populated
-* `overwrite(fromObject, toObject)` - Replaces all the values of one objects with another object
+* `overwrite(fromObject, toObject, doNotMutate = false)` - Replaces all the values of one objects with another object
 * `clone(object)` - Returns a cloned version of an object. Removing all child object references.
 * `isEqual(object1, object2)` - Checks if two objects are equal regardless of object reference.
 * `getDifference(object1, object2)` - Returns an array of object differences as `Difference` objects.
