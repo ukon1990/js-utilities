@@ -56,9 +56,7 @@ export class ObjectUtil {
             console.error('Could not overwrite an object because the source is null or undefined');
             return;
         }
-        const keyMap = {};
-        Object.keys(from).forEach(k => keyMap[k] = k);
-        Object.keys(to).forEach(k => keyMap[k] =  k);
+        const keyMap = this.getAllKeysFor(from, to);
 
         Object.keys(keyMap).forEach(key => {
             if (!to[key] && this.isObject(from[key])) {
@@ -71,6 +69,13 @@ export class ObjectUtil {
             ObjectUtil.overwriteField(from, key, to, true);
         });
         return to;
+    }
+
+    private static getAllKeysFor(from: object | any, to: object | any) {
+        const keyMap = {};
+        Object.keys(from).forEach(k => keyMap[k] = k);
+        Object.keys(to).forEach(k => keyMap[k] = k);
+        return keyMap;
     }
 
     private static overwriteField(from: object | any, key: string, to: object | any, merge: boolean = false) {
@@ -154,7 +159,9 @@ export class ObjectUtil {
 
     private static processKeys(object1: object | any, ignoreFields: any,
                                onlyFields: string[], onlyFieldsMap: Map<string, boolean>, object2: object | any, differences) {
-        Object.keys(object1).forEach(field => {
+
+        const keyMap = this.getAllKeysFor(object1, object2);
+        Object.keys(keyMap).forEach(field => {
             if (ignoreFields && ignoreFields[field]) {
                 return;
             } else if (this.shouldProcessField(onlyFields, onlyFieldsMap, field)) {

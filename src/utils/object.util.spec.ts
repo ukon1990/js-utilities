@@ -1,4 +1,5 @@
 import {ObjectUtil} from './object.util';
+import {Difference} from "..";
 
 describe('ObjectUtil', () => {
 
@@ -139,6 +140,22 @@ describe('ObjectUtil', () => {
             expect(ObjectUtil.getDifference(obj1, obj2).length).toBeTruthy();
             expect(ObjectUtil.isEqual(obj1, obj2)).toBeFalsy();
             expect(ObjectUtil.getDifference(obj2, obj2).length).toBeFalsy();
+        });
+
+        it('Should be able to detect differences both ways', () => {
+            const object1 = {
+                name: 'Åge',
+                age: 99,
+                profession: 'Snake tamer',
+                childFrom: {val: 9}
+            };
+            const object2 = {
+                profession: 'Carpenter',
+                favoriteDrink: 'Water',
+                childTo: {value: 1}
+            };
+            const diff: Difference[] = ObjectUtil.getDifference(object1, object2);
+            expect(diff.length).toBe(6);
         });
     });
 });
