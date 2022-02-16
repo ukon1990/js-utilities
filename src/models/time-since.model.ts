@@ -1,4 +1,5 @@
 export class TimeSince {
+    /* istanbul ignore next */
     constructor(
         public weeks: number,
         public days: number,

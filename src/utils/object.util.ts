@@ -1,7 +1,7 @@
 import {EmptyUtil} from './empty.util';
 import {ArrayUtil} from './array.util';
-import {Difference} from '../models/difference.model';
 import {CompareUtil} from './compare.util';
+import {Difference} from '..';
 
 export class ObjectUtil {
 
@@ -27,7 +27,7 @@ export class ObjectUtil {
      * @param from Object to copy values from
      * @param to Object to overwrite existing values from
      */
-    public static overwrite(from: object | any, to: object | any, doNotMutate: boolean = false): void {
+    public static overwrite(from: object | any, to: object | any, doNotMutate: boolean = false): object {
         if (doNotMutate) {
             to = this.clone(to);
         }
@@ -38,19 +38,60 @@ export class ObjectUtil {
         }
 
         Object.keys(from).forEach(key => {
-            ObjectUtil.overwriteField(from, key, to);
+            if (to[key]) {
+                ObjectUtil.overwriteField(from, key, to);
+            }
         });
         return to;
     }
 
-    private static overwriteField(from: object | any, key: string, to: object | any) {
+    /**
+     * Merges/Combines two objects into one, keeping all the
+     * values from each that does not exist in the other.
+     */
+    public static merge(from: object | any, to: object | any): object {
+        to = this.clone(to);
+
+        if (EmptyUtil.isNullOrUndefined(from)) {
+            console.error('Could not overwrite an object because the source is null or undefined');
+            return;
+        }
+        const keyMap = this.getAllKeysFor(from, to);
+
+        Object.keys(keyMap).forEach(key => {
+            if (!to[key] && this.isObject(from[key])) {
+                to[key] = {};
+            }
+            if (!from[key] && this.isObject(to[key])) {
+                from[key] = {};
+            }
+
+            ObjectUtil.overwriteField(from, key, to, true);
+        });
+        return to;
+    }
+
+    private static getAllKeysFor(from: object | any, to: object | any) {
+        const keyMap = {};
+        Object.keys(from).forEach(k => keyMap[k] = k);
+        Object.keys(to).forEach(k => keyMap[k] = k);
+        return keyMap;
+    }
+
+    private static overwriteField(from: object | any, key: string, to: object | any, merge: boolean = false) {
         if (ArrayUtil.isArray(from[key]) && to) {
             to[key] = ObjectUtil.clone(from[key]);
         } else if (ObjectUtil.isObject(from[key]) && to) {
-            to[key] = ObjectUtil.overwrite(from[key], to[key]);
+            to[key] = merge ?
+                this.merge(from[key], to[key]) :
+                this.overwrite(from[key], to[key]);
         } else {
             try {
-                to[key] = from[key];
+                if (merge) {
+                    to[key] = from[key] || to[key];
+                } else {
+                    to[key] = from[key];
+                }
             } catch (e) {
                 to[key] = null;
             }
@@ -101,27 +142,34 @@ export class ObjectUtil {
      * @param onlyFields The fields you wish to be considered: e.g ['name', 'age']
      */
     public static getDifference(object1: object | any, object2: object | any,
-                                ignoreFields?: any, onlyFields?: string[]): Array<Difference> {
-        const differences = new Array<Difference>(),
-        onlyFieldsMap = new Map<string, boolean>();
+                                ignoreFields?: any, onlyFields?: string[],
+                                checkForCyclicDependencies?: boolean, parentStackMap?: any[]): Difference[] {
+        const differences: Difference[] = [],
+            onlyFieldsMap = new Map<string, boolean>();
 
         ignoreFields = this.getIgnoreFields(ignoreFields, onlyFields, onlyFieldsMap);
 
         if (EmptyUtil.isNullOrUndefined(object1) || EmptyUtil.isNullOrUndefined(object2)) {
             differences.push(new Difference('array', object1, object2));
         } else {
-            this.processKeys(object1, ignoreFields, onlyFields, onlyFieldsMap, object2, differences);
+            this.processKeys(object1, ignoreFields, onlyFields, onlyFieldsMap, object2, differences,
+                checkForCyclicDependencies, parentStackMap);
         }
         return differences;
     }
 
     private static processKeys(object1: object | any, ignoreFields: any,
-                               onlyFields: string[], onlyFieldsMap: Map<string, boolean>, object2: object | any, differences) {
-        Object.keys(object1).forEach(field => {
+                               onlyFields: string[], onlyFieldsMap: Map<string, boolean>,
+                               object2: object | any, differences: Difference[],
+                               checkForCyclicDependencies?: boolean, parentStackMap?: any[]) {
+
+        const keyMap = this.getAllKeysFor(object1, object2);
+        Object.keys(keyMap).forEach(field => {
             if (ignoreFields && ignoreFields[field]) {
                 return;
             } else if (this.shouldProcessField(onlyFields, onlyFieldsMap, field)) {
-                CompareUtil.setDifferences(field, object1[field], object2[field], differences);
+                CompareUtil.setDifferences(field, object1[field], object2[field], differences,
+                    ignoreFields, onlyFields, checkForCyclicDependencies, parentStackMap);
             }
         });
     }

@@ -1,4 +1,5 @@
 import {ObjectUtil} from './object.util';
+import {Difference} from '..';
 
 describe('ObjectUtil', () => {
 
@@ -27,7 +28,7 @@ describe('ObjectUtil', () => {
         });
     });
 
-    describe('overwrite', () => {
+    describe('overwrite && merge', () => {
         it('Can overwrite one object with another', () => {
             const obj = {name: 'Teigen', child: [{name: 'Urge'}]};
             const obj2 = {name: 'Trond', child: [{name: 'Purge'}]};
@@ -38,6 +39,17 @@ describe('ObjectUtil', () => {
             expect(obj.child[0].name).toEqual(obj2.child[0].name);
             expect(obj === obj2).toBeFalsy();
             expect(obj.child === obj2.child).toBeFalsy();
+        });
+
+        it('Does not mutate if true', () => {
+            const obj = {name: 'Teigen', child: [{name: 'Urge'}]};
+            const obj2 = {name: 'Trond', child: [{name: 'Purge'}]};
+            const mutated = ObjectUtil.overwrite(obj2, obj, false);
+            const nonMutated = ObjectUtil.overwrite(obj2, obj, true);
+
+            expect(mutated === obj).toBe(true);
+            expect(nonMutated === obj).toBe(false);
+            expect(nonMutated).toEqual(obj);
         });
 
         it('Can overwrite nested objects', () => {
@@ -65,6 +77,28 @@ describe('ObjectUtil', () => {
 
             ObjectUtil.overwrite(undefined, obj);
             expect(obj).toEqual(obj);
+        });
+
+        it('Can merge and keep both values', () => {
+            const from = {
+                name: 'Åge',
+                age: 99,
+                profession: 'Snake tamer',
+                childFrom: {val: 9}
+            };
+            const to = {
+                profession: 'Carpenter',
+                favoriteDrink: 'Water',
+                childTo: {value: 1}
+            };
+
+            const result = ObjectUtil.merge(from, to) as any;
+            expect(result.name).toBe(from.name);
+            expect(result.age).toBe(from.age);
+            expect(result.profession).toBe(from.profession);
+            expect(result.favoriteDrink).toBe(to.favoriteDrink);
+            expect(result.childTo.value).toBe(to.childTo.value);
+            expect(result.childFrom.val).toBe(from.childFrom.val);
         });
     });
 
@@ -106,6 +140,24 @@ describe('ObjectUtil', () => {
             expect(ObjectUtil.getDifference(obj1, obj2).length).toBeTruthy();
             expect(ObjectUtil.isEqual(obj1, obj2)).toBeFalsy();
             expect(ObjectUtil.getDifference(obj2, obj2).length).toBeFalsy();
+        });
+
+        it('Should be able to detect differences both ways', () => {
+            const object1 = {
+                profession: 'Carpenter',
+                favoriteDrink: 'Water',
+                childTo: {value: 1, something: true, equal: true}
+            };
+            const object2 = {
+                name: 'Åge',
+                age: 99,
+                profession: 'Snake tamer',
+                childFrom: {val: 9},
+                childTo: {something: false, equal: true}
+            };
+            const diff: Difference[] = ObjectUtil.getDifference(object1, object2);
+            expect(diff.length).toBe(6);
+            expect(diff[2].children.length).toBe(2);
         });
     });
 });
